@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
+    
     <h1>{{ msg }}</h1>
+    <router-link :to="`/path-picker`">Food</router-link>
     <p>
       For guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -25,6 +27,8 @@
       <li><a href="https://vue-loader.vuejs.org/en" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+
+    
   </div>
 </template>
 
