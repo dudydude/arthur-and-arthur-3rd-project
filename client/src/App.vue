@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NavBar/>
+    <h1>Food & Mood - coz Netflix'nd Chill is out of date.</h1>
+    <section class="section">
+      <router-view/>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Food & Mood Project</strong> by Arthur & Arthur </p>
+            <p>- WebDev Project 2018 -</p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/NavBar';
+import api from './api';
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+  components: { NavBar },
+
+  created() {
+    const user = api.loadUser();
+    if (user) this.$root.user = user;
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
