@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <NavBar/>
-    <h1>Food & Mood - coz Netflix'nd Chill is out of date.</h1>
     <section class="section">
       <router-view/>
     </section>
