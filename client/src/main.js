@@ -1,10 +1,10 @@
 import Vue from "vue";
-import Buefy from "buefy";
+import BootstrapVue from "bootstrap-vue";
 import "buefy/lib/buefy.css";
 import App from "./App.vue";
 import router from "./router";
 
-Vue.use(Buefy);
+Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
