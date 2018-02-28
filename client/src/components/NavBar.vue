@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar is-transparent">
+<nav class="navbar">
   <div class="navbar-brand">
     <router-link class="navbar-item" to="/">
       <img src="../../public/FoodndMoond.jpg" alt="Food & Mood: coz Netflix 'nd Chill is out of date" width="112" height="28">
@@ -48,7 +48,7 @@
         <div class="field is-grouped" v-else>
             <router-link class="navbar-item" to="/profile" @click.native="isActive = false" >
                 <p class="control">
-                    Hi {{ $root.user.name }}
+                    Hi {{ $root.user.username }}
                 </p>
             </router-link>
 
