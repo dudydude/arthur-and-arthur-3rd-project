@@ -2,7 +2,7 @@
 <nav class="navbar is-transparent">
   <div class="navbar-brand">
     <router-link class="navbar-item" to="/">
-      <img src="https://bulma.io/images/bulma-logo.png" alt="Food & Mood: because Netflix 'nd Chill is out of date" width="112" height="28">
+      <img src="../../public/FoodndMoond.jpg" alt="Food & Mood: coz Netflix 'nd Chill is out of date" width="112" height="28">
     </router-link>
     <div
       class="navbar-burger burger"
