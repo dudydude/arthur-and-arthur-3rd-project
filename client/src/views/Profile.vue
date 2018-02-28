@@ -1,24 +1,19 @@
 
 <template>
-  <p class="content">
-    <pre>{{ secret }}</pre>
-  </p>
+  <div>
+    <h1>Now it's time to choose how can we help you</h1>
+    <link-router :to=`/mood`>Mood</router-link>
+    <p>Or </p>
+    <link-router :to=`/food`>Food</router-link>
+  </div>
 </template>
 
 <script>
-import api from "../api";
 
 export default {
   data() {
     return {
       secret: null
-    };
-  },
-
-  created() {
-    api.getSecret().then(secret => {
-      this.secret = secret;
-    });
-  }
+  }}
 };
 </script>

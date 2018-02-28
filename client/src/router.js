@@ -4,7 +4,6 @@ import Home from "./views/Home.vue";
 import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
-import ChooseScreen from "./views/ChooseScreen.vue";
 
 Vue.use(Router);
 
