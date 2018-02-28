@@ -5,6 +5,10 @@ const service = axios.create({
     process.env.NODE_ENV === "production" ? "/api" : "http://localhost:3000/api"
 });
 
+const movieFind = axios.create({
+  baseURL: "https://api.themoviedb.org/3/"
+});
+
 const errHandler = err => {
   console.error(err.response.data);
   throw err.response.data;
@@ -54,5 +58,22 @@ export default {
       return user;
     }
     return false;
+  },
+
+  // search for movies
+
+  search(query) {
+    return movieFind
+      .get(
+        `/search/movie?api_key=f04b2a25baed952b84af0eb4623bbc55&query=${query}`
+      )
+      .then(res => res.data)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+    console.log(query);
   }
 };
+
+// search for movies
