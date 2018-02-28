@@ -12,7 +12,7 @@ router.beforeEach((to, from, next) => {
   else next();
 });
 
-new Vue({
+const vm = new Vue({
   router,
   data: {
     user: null
