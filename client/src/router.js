@@ -7,7 +7,6 @@ import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import ChooseScreen from "./views/ChooseScreen.vue";
 
-
 Vue.use(Router);
 
 export default new Router({
@@ -26,8 +25,7 @@ export default new Router({
       component: Profile,
       meta: {
         requiresAuth: true
-      },
-      
+      }
     }
   ]
 });
