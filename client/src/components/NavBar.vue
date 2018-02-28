@@ -46,14 +46,14 @@
           </p>
         </div>
         <div class="field is-grouped" v-else>
+            <router-link class="navbar-item" to="/profile" @click.native="isActive = false" >
+                <p class="control">
+                    Hi {{ $root.user.name }}
+                </p>
+            </router-link>
+
           <p class="control">
-            Hi {{ $root.user.name }}
-          </p>
-          <p class="control">
-            <a
-              class="navbar-item"
-              @click="logout"
-            >
+            <a class="navbar-item" @click="logout">
               Logout
             </a>
           </p>

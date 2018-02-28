@@ -1,8 +1,17 @@
 
 <template>
-  <p class="content">
-    <pre>{{ secret }}</pre>
-  </p>
+<section>
+<div
+<h2>salut</h2>
+</div>
+<div>
+   <router-link to="/food">In mood for food</router-link>
+</div>
+<div>
+   <router-link to="/mood">Movies that match my mood</router-link>
+</div>
+
+   </section>
 </template>
 
 <script>

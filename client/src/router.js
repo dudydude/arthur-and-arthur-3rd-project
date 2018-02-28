@@ -4,7 +4,8 @@ import Home from "./views/Home.vue";
 import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
-import ChooseScreen from "./views/ChooseScreen.vue";
+import Food from "./views/Food.vue";
+import Mood from "./views/Mood.vue";
 
 Vue.use(Router);
 
@@ -30,6 +31,14 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/mood",
+      component: Mood
+    },
+    {
+      path: "/food",
+      component: Food
     }
   ]
 });
