@@ -47,7 +47,7 @@ export default {
       this.error = null;
       api
         .signup({
-          name: this.name,
+          email: this.email,
           username: this.username,
           password: this.password
         })
@@ -63,7 +63,7 @@ export default {
   computed: {
     usernameError() {
       if (!this.error) return null;
-      if (this.error.name === "UserExistsError") {
+      if (this.error.email === "UserExistsError") {
         return this.error.message;
       }
     }
