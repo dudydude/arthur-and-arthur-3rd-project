@@ -1,23 +1,38 @@
 var express = require("express");
 var router = express.Router();
-var apiKey = "f04b2a25baed952b84af0eb4623bbc55";
-var url = "https://api.themoviedb.org/3/"
+var axios = require("axios");
 
-/* Get Movie by Keywords */
+const movieFind = axios.create({
+  baseURL: "https://api.themoviedb.org/3/",
+  params: {
+    api_key: "f04b2a25baed952b84af0eb4623bbc55"
+  }
+});
 
-router.route("/mood/:id").get(function(req, res){
-    res.send(res => res.data)
-}).post()
+router.get("/", function(req, res, next) {
+  movieFind
+    .get(`/search/movie/`, {
+      params: {
+        query: req.query.query
+      }
+    })
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
-
-
-
-, next) {
-   // var theme = req.params.id 
-  router.get(mood._id, function(req, res, next) {
-
-  });
-  res.json();
+router.get("/:id", function(req, res, next) {
+  movieFind
+    .get(`/movie/${req.params.id}`)
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 module.exports = router;
