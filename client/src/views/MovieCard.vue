@@ -1,7 +1,13 @@
 <template>
-    <div>
+    <div class="b-container">
+        <div v-if="movie">
+        <h2>{{movie.title}}</h2>
+        <p> {{movie.overview}} </p>
+        
+ 
         <pre>{{movie}}</pre>
-        <p> hello </p>
+        </div>
+        <p v-else>Loading</p>
     </div>
 </template>
 
@@ -15,12 +21,13 @@ export default {
     data() {
         return {
             movie: null,
+            poster: "http://image.tmdb.org/t/p/w185/"
         };
     },  
     created(){
         api.getMovie(this.$route.params.id).then(movie => {
             this.movie = movie;
-            console.log(this.movie)
+            //console.log(this.movie)
         });
     }
 }

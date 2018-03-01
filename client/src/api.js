@@ -5,10 +5,6 @@ const service = axios.create({
     process.env.NODE_ENV === "production" ? "/api" : "http://localhost:3000/api"
 });
 
-const movieFind = axios.create({
-  baseURL: "https://api.themoviedb.org/3/"
-});
-
 const errHandler = err => {
   console.error(err.response.data);
   throw err.response.data;
@@ -63,10 +59,13 @@ export default {
   // search for movies
 
   search(query) {
-    return movieFind
-      .get(
-        `/search/movie?api_key=f04b2a25baed952b84af0eb4623bbc55&query=${query}`
-      )
+    // use the service. qui remplace l'url
+    return service
+      .get(`/movies`, {
+        params: {
+          query
+        }
+      })
       .then(res => res.data.results)
       .catch(err => {
         console.error(err);
@@ -74,11 +73,17 @@ export default {
       });
   },
 
+  searchKeywords(query) {
+    return service.get(`/movies`, {
+      params: {
+        query
+      }
+    });
+  },
+
   getMovie(id) {
-    return movieFind
-      .get(
-        `/movie/${id}?api_key=f04b2a25baed952b84af0eb4623bbc55&callback=test`
-      )
+    return service
+      .get(`/movies/${id}`)
       .then(res => res.data)
       .catch(err => {
         console.error(err);
