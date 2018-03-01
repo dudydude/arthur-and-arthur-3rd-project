@@ -1,29 +1,32 @@
 <template>
-  <section>
-    <form @submit.prevent="signup">
-      <b-field label="Name">
-          <b-input v-model="name"></b-input>
-      </b-field>
+  <div>
+    <b-form @submit.prevent="signup">
+      <b-form-group label="Email address:" description="We'll never share your email with anyone else.">
+          <b-form-input  type="email"
+                      v-model="email"
+                      required
+                      placeholder="Enter email"></b-form-input>
+      </b-form-group>
 
-      <b-field
-        label="Username"
-        :type="usernameError && 'is-danger'"
+      <b-form-group
+         label="Your name:"
+        :type="usernameError && 'danger'"
         :message="usernameError"
       >
-          <b-input maxlength="30" v-model="username" required icon="account"></b-input>
-      </b-field>
+          <b-form-input maxlength="30" v-model="username" placeholder="Enter username" required icon="account"></b-form-input>
+      </b-form-group>
 
-      <b-field label="Password">
-          <b-input type="password"
+      <b-form-group label="Password">
+          <b-form-input type="password"
             required
             v-model="password" 
             icon="lock"
-            password-reveal>
-          </b-input>
-      </b-field>
-      <button class="button is-primary">Signup</button>
-    </form>
-  </section>
+            password-reveal placeholder="Enter password">
+          </b-form-input>
+      </b-form-group>
+      <b-button  type="submit" variant="primary">Signup</b-button>
+    </b-form>
+  </div>
 </template>
 
 <script>
@@ -32,7 +35,7 @@ import api from "../api";
 export default {
   data() {
     return {
-      name: "",
+      email: "",
       username: "",
       password: "",
 
@@ -44,7 +47,7 @@ export default {
       this.error = null;
       api
         .signup({
-          name: this.name,
+          email: this.email,
           username: this.username,
           password: this.password
         })
@@ -60,7 +63,7 @@ export default {
   computed: {
     usernameError() {
       if (!this.error) return null;
-      if (this.error.name === "UserExistsError") {
+      if (this.error.email === "UserExistsError") {
         return this.error.message;
       }
     }

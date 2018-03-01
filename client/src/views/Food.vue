@@ -4,7 +4,7 @@
 <div>
 <h2 class="has-text-centered">À Taaaaaable!!</h2>
 <div>
-   <button v-on:click="show =display">Il y a une zouze, j'claque du flooz</button>
+   <button to="/searchrecipe">Il y a une zouze, j'claque du flooz</button>
 </div>
 <div>
    <router-link to="/searchfrigo">J'ai les crocs, j'déglingue l'frigo!</router-link>
