@@ -9,6 +9,10 @@ const movieFind = axios.create({
   baseURL: "https://api.themoviedb.org/3/"
 });
 
+// const movieFind = axios.create({
+//   baseURL: "https://api.themoviedb.org/3/"
+// });
+
 const errHandler = err => {
   console.error(err.response.data);
   throw err.response.data;

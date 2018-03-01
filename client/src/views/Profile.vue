@@ -1,11 +1,11 @@
 
 <template>
-<section>
-<div
-<h2>salut</h2>
+<section class="text-center">
+<div>
+<h2>Salut à toi {{$root.user.username}}</h2>
 </div>
 <div>
-   <router-link to="/food">In mood for food</router-link>
+   <router-link to="/food">In mood for some food</router-link>
 </div>
 <div>
    <router-link to="/mood">Movies that match my mood</router-link>
