@@ -7,6 +7,7 @@ import Profile from "./views/Profile.vue";
 import Food from "./views/Food.vue";
 import Mood from "./views/Mood.vue";
 import Recipe from "./views/SearchRecipe.vue";
+import MovieCard from "./views/MovieCard.vue";
 
 Vue.use(Router);
 
@@ -48,6 +49,10 @@ export default new Router({
     {
       path: "/searchfrigo",
       component: Food
+    },
+    {
+      path: "/movie/:id",
+      component: MovieCard
     }
   ]
 });

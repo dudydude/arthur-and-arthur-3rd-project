@@ -5,7 +5,7 @@ var favicon = require("serve-favicon");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/project3")
+mongoose.connect("mongodb://localhost/project3");
 
 const passport = require("passport");
 const User = require("./models/user");
@@ -58,6 +58,7 @@ const authRoutes = require("./routes/auth");
 
 app.use("/", index);
 app.use("/api", authRoutes);
+app.use("/api/movies", require("./routes/movies"));
 
 app.get(
   "/api/secret",

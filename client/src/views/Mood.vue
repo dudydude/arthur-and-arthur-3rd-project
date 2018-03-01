@@ -3,13 +3,17 @@
 <div class="field">
   <label class="label">Name</label>
   <div class="control">
-    <input class="input" type="text" placeholder="Text input" v-model="query" @keyup.enter="search">
+    <input class="input" type="text" placeholder="Text input" v-model="query">
   </div>
+  <button @click="search"> Search </button>
 </div>
 
 <div>
     <ul>
-        <li v-for="result in results">{{result.title}}</li>
+        <li v-for="result in results">
+            <h2>{{result.title}}</h2>
+            <router-link :to="`/movie/${result.id}`"> check the page</router-link>
+        </li>
     </ul>
 </div>
 </section>
