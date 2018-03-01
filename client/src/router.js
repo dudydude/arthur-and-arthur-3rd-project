@@ -6,7 +6,6 @@ import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import Food from "./views/Food.vue";
 import Mood from "./views/Mood.vue";
-import Recipe from "./views/SearchRecipe.vue";
 import MovieCard from "./views/MovieCard.vue";
 
 Vue.use(Router);
@@ -40,14 +39,6 @@ export default new Router({
     },
     {
       path: "/food",
-      component: Food
-    },
-    {
-      path: "/searchrecipe",
-      component: Recipe
-    },
-    {
-      path: "/searchfrigo",
       component: Food
     },
     {

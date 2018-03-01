@@ -1,25 +1,16 @@
 <template>
     <section>
-<h2 class="m-2" v-if="show">Enter what you're craving for, we will find it for you:</h2>
+<h2 class="m-2" v-if="otherShow">Enter what you've, we will do the rest for you:</h2>
 
     <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="recipeName"
-                    label="Recipe name"
-                    label-for="exampleInput2">
-        <b-form-input id="dishName"
-                      type="text"
-                      v-model="form.dishname"
-                      placeholder="Enter the name of a dish">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group id="cuisineType"
+    <b-form @submit="onSubmit" @reset="onReset" v-if="otherShow">
+      <b-form-group id="ingredientForm"
                     label="Cuisine Type"
                     label-for="exampleInput2">
-        <b-form-input id="keywordsMarmiton"
+        <b-form-input id="ingredients"
                       type="text"
-                      v-model="form.keywordsMarmiton"
-                      placeholder="Enter a type of cuisine">
+                      v-model="form.ingredients"
+                      placeholder="Enter your ingredients">
         </b-form-input>
       </b-form-group>
       <b-form-group id="courseTypeForm"
@@ -50,8 +41,7 @@ export default {
   data() {
     return {
       form: {
-        dishname: "",
-        keywordsMarmiton: [],
+        ingredients: [],
         food: null,
         checked: []
       },
@@ -62,7 +52,6 @@ export default {
         "Dessert",
         "Apéritif"
       ],
-      show: true,
       otherShow: true
     };
   },
@@ -79,10 +68,8 @@ export default {
       this.form.food = null;
       this.form.checked = [];
       /* Trick to reset/clear native browser form validation state */
-      this.show = false;
       this.otherShow = false;
       this.$nextTick(() => {
-        this.show = true;
         this.otherShow = true;
       });
     }
