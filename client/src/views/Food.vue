@@ -1,28 +1,34 @@
 <template>
 <section>
 
-<div>
+<div class="text-center">
 <h2 class="has-text-centered">À Taaaaaable!!</h2>
-<div>
-   <button to="/searchrecipe">Il y a une zouze, j'claque du flooz</button>
+<div class="m-2">
+   <b-button @click="show = true" variant="warning">Il y a une zouze, j'claque du flooz</b-button>
 </div>
-<div>
-   <router-link to="/searchfrigo">J'ai les crocs, j'déglingue l'frigo!</router-link>
+<div class="m-2">
+   <b-button @click="otherShow = true" variant="primary" to="/searchfrigo">J'ai les crocs, j'déglingue l'frigo!</b-button>
 </div>
 </div>
 
-
-<h2>Enter what you're craving for, we will do the rest:</h2>
-<SearchForFood/>
+<div v-if="show" v-elseif="otherShow">
+<SearchForFood class="m-5"/>
+</div>
 </section>
 
 </template>
 
 <script>
-import SearchForFood from '../components/SearchForFood';
+import SearchForFood from "../components/SearchForFood";
 import api from "../api";
 
 export default {
-    components: { SearchForFood }
+  data() {
+    return {
+      show: false,
+      otherShow: false
+    };
+  },
+  components: { SearchForFood }
 };
 </script>

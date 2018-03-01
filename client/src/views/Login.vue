@@ -1,8 +1,8 @@
 <template>
-  <section>
-    <b-notification type="is-danger" has-icon v-if="error">
+  <section class="m-5">
+    <b-alert show variant="danger" has-icon v-if="error">
       {{ error.error }}
-    </b-notification>
+    </b-alert>
     <b-form @submit.prevent="login">
       <b-form-group
         label="Username"
@@ -18,7 +18,9 @@
             password-reveal>
           </b-form-input>
       </b-form-group>
-      <button class="button is-primary">Login</button>
+      <div class="text-center">
+      <b-button type="submit" variant="primary">Login</b-button>
+      </div>
     </b-form>
   </section>
 </template>

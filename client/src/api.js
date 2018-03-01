@@ -5,6 +5,10 @@ const service = axios.create({
     process.env.NODE_ENV === "production" ? "/api" : "http://localhost:3000/api"
 });
 
+// const movieFind = axios.create({
+//   baseURL: "https://api.themoviedb.org/3/"
+// });
+
 const errHandler = err => {
   console.error(err.response.data);
   throw err.response.data;

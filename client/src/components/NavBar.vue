@@ -1,11 +1,11 @@
 <template>
-<nav class="navbar">
-  <div class="navbar-brand">
+<b-navbar class="navbar">
+  <b-navbar-brand>
     <router-link class="navbar-item" to="/">
       <img src="../../public/FoodndMoond.jpg" alt="Food & Mood: coz Netflix 'nd Chill is out of date" width="112" height="28">
     </router-link>
     <div
-      class="navbar-burger burger"
+      class="navbar-nav mr-auto"
       :class="{ 'is-active': isActive }"
       @click="isActive = !isActive"
     >
@@ -13,9 +13,9 @@
       <span></span>
       <span></span>
     </div>
-  </div>
+  </b-navbar-brand>
 
-  <div class="navbar-menu" :class="{ 'is-active': isActive }">
+  <div class="navbar-toggler" :class="{ 'is-active': isActive }">
     <div class="navbar-start">
       <router-link
         class="navbar-item" to="/about"
@@ -61,16 +61,16 @@
       </div>
     </div>
   </div>
-</nav>
+</b-navbar>
 </template>
 
 <script>
-import api from '../api';
+import api from "../api";
 
 export default {
   data() {
     return {
-      isActive: false,
+      isActive: false
     };
   },
 
@@ -78,8 +78,8 @@ export default {
     logout() {
       api.logout();
       this.$root.user = null;
-      this.$router.push('/login');
-    },
-  },
+      this.$router.push("/login");
+    }
+  }
 };
 </script>

@@ -7,9 +7,8 @@
 
     <footer class="footer">
       <div class="container">
-        <div class="content has-text-centered">
-          <p>
-            <strong>Food & Mood Project</strong> by Arthur & Arthur </p>
+        <div class="text-center">
+          <p><strong>Food & Mood Project</strong> by Arthur & Arthur </p>
             <p>- WebDev Project 2018 -</p>
         </div>
       </div>
@@ -18,8 +17,8 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar';
-import api from './api';
+import NavBar from "./components/NavBar";
+import api from "./api";
 
 export default {
   components: { NavBar },
@@ -27,7 +26,7 @@ export default {
   created() {
     const user = api.loadUser();
     if (user) this.$root.user = user;
-  },
+  }
 };
 </script>
 
