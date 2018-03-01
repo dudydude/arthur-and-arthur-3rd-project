@@ -7,6 +7,13 @@
   </div>
   <button @click="search"> Search </button>
 </div>
+<div class="field">
+  <label class="label">Keywords</label>
+  <div class="control">
+    <input class="input" type="text" placeholder="Text input" v-model="queryKeywords">
+  </div>
+  <button @click="searchKeywords"> Search </button>
+</div>
 
 <div>
     <ul>
@@ -27,12 +34,18 @@ export default {
     return {
       query: '',
       results: [],
+      queryKeywords:''
     };
   },
 
   methods: {
     search(query) {
       api.search(this.query).then(results => {
+        this.results = results;
+      });
+    },
+    searchKeywords(query) {
+      api.searchKeywords(this.query).then(results => {
         this.results = results;
       });
     },
