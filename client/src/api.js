@@ -67,12 +67,23 @@ export default {
       .get(
         `/search/movie?api_key=f04b2a25baed952b84af0eb4623bbc55&query=${query}`
       )
+      .then(res => res.data.results)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+  },
+
+  getMovie(id) {
+    return movieFind
+      .get(
+        `/movie/${id}?api_key=f04b2a25baed952b84af0eb4623bbc55&callback=test`
+      )
       .then(res => res.data)
       .catch(err => {
         console.error(err);
         throw err;
       });
-    console.log(query);
   }
 };
 

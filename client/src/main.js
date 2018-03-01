@@ -1,6 +1,6 @@
 import Vue from "vue";
 import BootstrapVue from "bootstrap-vue";
-import "buefy/lib/buefy.css";
+//import "buefy/lib/buefy.css";
 import App from "./App.vue";
 import router from "./router";
 
