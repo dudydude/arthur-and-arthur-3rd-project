@@ -59,6 +59,7 @@ const authRoutes = require("./routes/auth");
 app.use("/", index);
 app.use("/api", authRoutes);
 app.use("/api/movies", require("./routes/movies"));
+//app.use("/api/food", require("./routes/food"));
 
 app.get(
   "/api/secret",
