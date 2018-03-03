@@ -4,6 +4,7 @@ import App from "./App.vue";
 import router from "./router";
 
 Vue.use(BootstrapVue);
+
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
