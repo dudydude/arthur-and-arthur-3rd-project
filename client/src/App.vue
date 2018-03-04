@@ -8,7 +8,7 @@
     <footer class="footer">
       <div class="container">
         <div class="text-center">
-          <p><strong>Food & Mood Project</strong> by Arthur & Arthur </p>
+          <p><strong>Food & Mood Project</strong><br>made with ❤️ by Arthur & Arthur </p>
             <p>- WebDev Project 2018 -</p>
         </div>
       </div>

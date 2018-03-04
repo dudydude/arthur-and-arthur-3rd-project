@@ -65,7 +65,7 @@ export default {
   search(query) {
     // use the service. qui remplace l'url
     return service
-      .get(`/movies`, {
+      .get(`/movie`, {
         params: {
           query
         }
@@ -79,7 +79,7 @@ export default {
 
   searchKeywords(value) {
     return service
-      .get(`/keyword/${value.id}`)
+      .get(`keyword/${value.id}`)
       .then(res => res.data.results)
       .catch(err => {
         console.error(err);
@@ -89,17 +89,19 @@ export default {
 
   searchGenre(query) {
     return service
-      .get(`/genre/${query.id}`)
-      .then(res => res.data)
+      .get(`genre/${query.id}`)
+      .then(res => res.data.results)
       .catch(err => {
         console.error(err);
         throw err;
       });
   },
 
-  getMovie(query) {
+  getMovie(id) {
+    console.log("loose");
+
     return service
-      .get(`/movies/${query.id}`)
+      .get(`movie/${id}`)
       .then(res => res.data)
       .catch(err => {
         console.error(err);

@@ -5,7 +5,8 @@ var axios = require("axios");
 const movieFind = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   params: {
-    api_key: "f04b2a25baed952b84af0eb4623bbc55"
+    api_key: "f04b2a25baed952b84af0eb4623bbc55",
+    inlude_adult: false
   }
 });
 
@@ -28,22 +29,9 @@ router.get("/", function(req, res, next) {
 
 // display movie page
 
-router.get("/details/:id", function(req, res, next) {
-  movieFind
-    .get(`/movie/${req.params.id}`)
-    .then(response => {
-      res.json(response.data);
-    })
-    .catch(err => {
-      next(err);
-    });
-});
-
-// call api for a list of movies by keyword
-
 router.get("/:id", function(req, res, next) {
   movieFind
-    .get(`keyword/${req.params.id}/movies`)
+    .get(`/movie/${req.params.id}`)
     .then(response => {
       res.json(response.data);
     })

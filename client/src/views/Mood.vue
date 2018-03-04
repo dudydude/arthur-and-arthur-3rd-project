@@ -3,8 +3,16 @@
     <div class="text-center" v-if="search">
       <h1> What are you looking for ? </h1>
       <div v-if="!show">
-        <b-button>Inspiration ? </b-button>
-        <b-button @click="show=true">A specific movie ?</b-button>
+        <div>
+          <h2> Choose a mood and we will do the rest :</h2>
+          <br>
+          <b-button class="button-profile">Inspiration </b-button>
+        </div>
+        <div>
+          <h2> May be you already have an idea
+            <br>(choose a movie and we will do the rest) :</h2>
+          <b-button class="button-profile" @click="show=true">Movie</b-button>
+        </div>
       </div>
     </div>
 
@@ -15,13 +23,20 @@
 
           <b-input class="mb-2 mr-sm-2 mb-sm-0" placeholder="Jane Doe" v-model="query" @submit.prevent.stop="search" />
 
-          <b-button @click="search"> Search </b-button>
+          <b-button @click="search"> OK </b-button>
         </div>
         <div class="field">
 
-          <multiselect v-model="value" :options="options" placeholder="Search by keywords" label="name" track-by="name"></multiselect>
-          <p>{{value}}</p>
-          <b-button @click="searchKeywords"> Search </b-button>
+          <multiselect v-model="keywordSearch" :options="options" placeholder="Search by keywords" label="name" track-by="name" class="mb-2 mr-sm-2 mb-sm-0"
+            id="inlineFormInputName2"></multiselect>
+          <b-button @click="searchKeywords"> OK </b-button>
+        </div>
+
+        <div class="field">
+
+          <multiselect v-model="genreSearch" :options="genre" placeholder="Search by genre" label="name" track-by="name">
+            <b-button @click="searchGenre"> OK </b-button>
+          </multiselect>
         </div>
 
 
@@ -44,8 +59,10 @@
                   <br>{{result.overview}}
                 </p>
 
-                <b-button variant="primary" :to="`/movie/details/${result.id}`">See more</b-button>
+                <b-button variant="primary" :to="`movie/${result.id}`">See more</b-button>
+
               </b-media-body>
+
             </b-media>
           </b-card>
         </li>
@@ -59,8 +76,9 @@
 
 <script>
   import api from "../api";
-  import Multiselect from 'vue-multiselect';
-  import dataKeyword from '../../../server/data/keywords_tmdb.json'
+  import Multiselect from "vue-multiselect";
+  import dataKeyword from "../../../server/data/keywords_tmdb.json";
+  import dataGenre from "../../../server/data/genre_tmdb.json";
 
   export default {
     data() {
@@ -70,14 +88,15 @@
         query: "",
         results: [],
         options: dataKeyword,
-        value: "",
-      }
+        keywordSearch: "",
+        genreSearch: "",
+        genre: dataGenre
+      };
     },
 
     components: {
       Multiselect
     },
-
 
     methods: {
       search(query) {
@@ -86,19 +105,18 @@
         });
       },
 
-      searchKeywords(value) {
-        api.searchKeywords(this.value).then(results => {
+      searchKeywords(keywordSearch) {
+        api.searchKeywords(this.keywordSearch).then(results => {
+          this.results = results;
+        });
+      },
+
+      searchGenre(genreSearch) {
+        api.searchGenre(this.genreSearch).then(results => {
           this.results = results;
         });
       }
     },
-
-
-
-
-
-
-
     computed: {}
   };
 </script>

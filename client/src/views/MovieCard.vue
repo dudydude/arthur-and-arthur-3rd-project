@@ -36,7 +36,7 @@ export default {
   created() {
     api.getMovie(this.$route.params.id).then(movie => {
       this.movie = movie;
-      //console.log(this.movie)
+      console.log(this.movie);
     });
   }
 };
