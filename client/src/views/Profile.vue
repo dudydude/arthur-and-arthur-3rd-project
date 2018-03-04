@@ -5,12 +5,14 @@
 <h2>Salut à toi {{$root.user.username}}</h2>
 </div>
 <div>
-   <router-link to="/food">In mood for some food</router-link>
+  <b-button variant="primary" class="m-3 btn-lg" to="/food">In mood for some food</b-button>
 </div>
 <div>
-   <router-link to="/mood">Movies that match my mood</router-link>
+  <b-button variant="warning" class="m-3 btn-lg" to="/mood">Movies that match my mood</b-button>
 </div>
-
+<div class="m-5 px-5">
+<hr>
+</div>
    </section>
 </template>
 

@@ -18,8 +18,11 @@
 <div v-else-if="foorForm === `searchFridge`">
 <SearchByFridge class="m-5"/>
 </div>
-</section>
 
+<div class="m-5 px-5">
+<hr>
+</div>
+</section>
 </template>
 
 <script>
