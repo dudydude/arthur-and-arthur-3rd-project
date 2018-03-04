@@ -9,6 +9,8 @@ const movieFind = axios.create({
   }
 });
 
+// call api for a list of movies by name
+
 router.get("/", function(req, res, next) {
   movieFind
     .get(`/search/movie/`, {
@@ -24,9 +26,37 @@ router.get("/", function(req, res, next) {
     });
 });
 
-router.get("/:id", function(req, res, next) {
+// display movie page
+
+router.get("/details/:id", function(req, res, next) {
   movieFind
     .get(`/movie/${req.params.id}`)
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+// call api for a list of movies by keyword
+
+router.get("/:id", function(req, res, next) {
+  movieFind
+    .get(`keyword/${req.params.id}/movies`)
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+// call api for a list of movies by genre
+
+router.get("genre", function(req, res, next) {
+  movieFind
+    .get(`genre/${req.params.id}/movies`)
     .then(response => {
       res.json(response.data);
     })

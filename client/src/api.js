@@ -77,17 +77,29 @@ export default {
       });
   },
 
-  searchKeywords(query) {
-    return service.get(`/movies`, {
-      params: {
-        query
-      }
-    });
+  searchKeywords(value) {
+    return service
+      .get(`/keyword/${value.id}`)
+      .then(res => res.data.results)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
   },
 
-  getMovie(id) {
+  searchGenre(query) {
     return service
-      .get(`/movies/${id}`)
+      .get(`/genre/${query.id}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+  },
+
+  getMovie(query) {
+    return service
+      .get(`/movies/${query.id}`)
       .then(res => res.data)
       .catch(err => {
         console.error(err);
