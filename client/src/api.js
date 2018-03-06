@@ -107,6 +107,16 @@ export default {
         console.error(err);
         throw err;
       });
+  },
+
+  selectMovie(id) {
+    return service
+      .post(`/combo/movie/${id}`)
+      .then(res => console.log("hello"))
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
   }
 };
 

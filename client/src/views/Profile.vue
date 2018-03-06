@@ -1,10 +1,9 @@
 <template>
-<<<<<<< HEAD
   <section class="text-center container">
     <div>
       <h2>Salut à toi {{$root.user.username}}</h2>
     </div>
-
+  <div v-if="!movie">
     <h3 class="m-2 mt-5">How to use the app</h3>
     <p class="text-justify mx-5 my-2">Nulla at libero scelerisque, placerat leo eget, mattis arcu. Mauris quis dui et tellus sagittis bibendum vel eu lorem.
       Integer eget aliquam odio. In aliquet vehicula condimentum. Sed sodales leo sit amet diam rutrum, ac ultrices nisl
@@ -25,28 +24,28 @@
       <p> Je cherche d'abord un plat et je vous laisse me surprendre avec un film </p>
       <br>
 
-      <router-link class="button-profile" to="/mood">Movies that match my mood</router-link>
+      <b-button class="button-profile" @click="movie=true">Movies that match my mood</b-button>
     </div>
 
+    </div>
+</div>
+        <div class="text-center" v-if="movie">
+      <h1> What are you looking for ? </h1>
+      <div>
+        <div>
+          <h2> Choose a mood and we will do the rest :</h2>
+          <br>
+          <b-button :to="`/moodlist`" class="button-profile">Inspiration </b-button>
+        </div>
+        <div>
+          <h2> May be you already have an idea
+            <br>(choose a movie and we will do the rest) :</h2>
+          <b-button class="button-profile" :to="`/mood`">Movie</b-button>
+        </div>
+      </div>
     </div>
 
   </section>
-=======
-<section class="text-center">
-<div>
-<h2>Salut à toi {{$root.user.username}}</h2>
-</div>
-<div>
-  <b-button variant="primary" class="m-3 btn-lg" to="/food">In mood for some food</b-button>
-</div>
-<div>
-  <b-button variant="warning" class="m-3 btn-lg" to="/mood">Movies that match my mood</b-button>
-</div>
-<div class="m-5 px-5">
-<hr>
-</div>
-   </section>
->>>>>>> d7debd62e1920a9d2982d59518772631d7919f05
 </template>
 
 <script>
@@ -55,7 +54,8 @@ import api from "../api";
 export default {
   data() {
     return {
-      secret: null
+      secret: null,
+      movie: false
     };
   },
 

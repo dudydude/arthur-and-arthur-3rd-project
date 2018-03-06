@@ -1,22 +1,8 @@
 <template>
   <section class="container">
-    <div class="text-center" v-if="search">
-      <h1> What are you looking for ? </h1>
-      <div v-if="!show">
-        <div>
-          <h2> Choose a mood and we will do the rest :</h2>
-          <br>
-          <b-button class="button-profile">Inspiration </b-button>
-        </div>
-        <div>
-          <h2> May be you already have an idea
-            <br>(choose a movie and we will do the rest) :</h2>
-          <b-button class="button-profile" @click="show=true">Movie</b-button>
-        </div>
-      </div>
-    </div>
 
-    <div v-if="show">
+
+    <div>
       <b-form inline>
         <div class="field">
           <label class="sr-only" for="inlineFormInputName2">Name</label>
@@ -35,8 +21,8 @@
         <div class="field">
 
           <multiselect v-model="genreSearch" :options="genre" placeholder="Search by genre" label="name" track-by="name">
-            <b-button @click="searchGenre"> OK </b-button>
           </multiselect>
+          <b-button @click="searchGenre"> OK </b-button>
         </div>
 
 
@@ -57,9 +43,19 @@
                 <p>
                   Synopsis :
                   <br>{{result.overview}}
+
                 </p>
 
                 <b-button variant="primary" :to="`movie/${result.id}`">See more</b-button>
+
+                <div>
+                  <b-btn v-b-modal.modal1 @click="selectMovie(result.id)">Choose this movie</b-btn>
+
+                  <!-- Modal Component -->
+                  <b-modal id="modal1" title="Step 1">
+                    <p class="my-4">Vous avez sélectionnez {{result.title}}</p>
+                  </b-modal>
+                </div>
 
               </b-media-body>
 
@@ -70,55 +66,67 @@
     </div>
 
 
-
   </section>
 </template>
 
 <script>
-  import api from "../api";
-  import Multiselect from "vue-multiselect";
-  import dataKeyword from "../../../server/data/keywords_tmdb.json";
-  import dataGenre from "../../../server/data/genre_tmdb.json";
+import api from "../api";
+import Multiselect from "vue-multiselect";
+import dataKeyword from "../../../server/data/keywords_tmdb.json";
+import dataGenre from "../../../server/data/genre_tmdb.json";
 
-  export default {
-    data() {
-      return {
-        show: false,
-        // search: true;
-        query: "",
-        results: [],
-        options: dataKeyword,
-        keywordSearch: "",
-        genreSearch: "",
-        genre: dataGenre
-      };
+export default {
+  data() {
+    return {
+      show: false,
+      // search: true;
+      query: "",
+      results: [],
+      keywordSearch: "",
+      options: dataKeyword,
+      genreSearch: "",
+      genre: dataGenre,
+      modal: false
+    };
+  },
+
+  components: {
+    Multiselect
+  },
+
+  methods: {
+    search(query) {
+      api.search(this.query).then(results => {
+        this.results = results;
+      });
     },
 
-    components: {
-      Multiselect
+    searchKeywords(keywordSearch) {
+      api.searchKeywords(this.keywordSearch).then(results => {
+        this.results = results;
+      });
     },
 
-    methods: {
-      search(query) {
-        api.search(this.query).then(results => {
-          this.results = results;
-        });
-      },
+    searchGenre(genreSearch) {
+      api.searchGenre(this.genreSearch).then(results => {
+        this.results = results;
+      });
+    },
 
-      searchKeywords(keywordSearch) {
-        api.searchKeywords(this.keywordSearch).then(results => {
-          this.results = results;
-        });
-      },
-
-      searchGenre(genreSearch) {
-        api.searchGenre(this.genreSearch).then(results => {
-          this.results = results;
-        });
-      }
+    selectMovie(id) {
+      api.selectMovie(id).then(res => {
+        this.modal = true;
+        console.log(this.modal);
+      });
     },
     computed: {}
-  };
+  }
+};
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+.field {
+  display: flex;
+  flex-direction: row;
+}
+</style>

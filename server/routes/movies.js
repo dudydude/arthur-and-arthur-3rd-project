@@ -1,6 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
+const jwt = require("jwt-simple");
+const passport = require("passport");
+const config = require("../config");
+var Combo = require("../models/combo");
 
 const movieFind = axios.create({
   baseURL: "https://api.themoviedb.org/3/",

@@ -7,6 +7,7 @@ import Profile from "./views/Profile.vue";
 import Food from "./views/Food.vue";
 import Mood from "./views/Mood.vue";
 import MovieCard from "./views/MovieCard.vue";
+import MoodList from "./views/MoodList.vue";
 
 Vue.use(Router);
 
@@ -33,6 +34,7 @@ export default new Router({
         requiresAuth: true
       }
     },
+
     {
       path: "/mood",
       component: Mood
@@ -44,6 +46,10 @@ export default new Router({
     {
       path: "/movie/:id",
       component: MovieCard
+    },
+    {
+      path: "/moodlist",
+      component: MoodList
     }
   ]
 });
