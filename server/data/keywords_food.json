@@ -1,0 +1,13 @@
+[
+  { "id": 240, "name": "kosher" },
+  { "id": 1008, "name": "without pork" },
+  { "id": 612, "name": "cheap" },
+  { "id": 616, "name": "easy" },
+  { "id": 2700, "name": "very easy" },
+  { "id": 520, "name": "difficult" },
+  { "id": 544, "name": "vegetarian" },
+  { "id": 7376, "name": "main course" },
+  { "id": 10084, "name": "dessert" },
+  { "id": 11196, "name": "drink" },
+  { "id": 4932, "name": "starter" }
+]

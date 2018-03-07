@@ -13,6 +13,7 @@ const formatted = foodAPIRaw
       .trim()
       .split("- ");
     ingredients.splice(0, 1);
+
     return {
       title: recipe.title.replace(whitespaceRE, " ").trim(),
       method: recipe.method
@@ -25,7 +26,8 @@ const formatted = foodAPIRaw
         .split(" : ")
         .shift()
         .replace("Ingredients ", ""),
-      ingredients: ingredients,
+      ingredients: ingredients.slice(0, ingredients.length / 2),
+      ingredientsUSA: ingredients.slice(ingredients.length / 2),
       cookingTime: recipe.cookingTime.replace(whitespaceRE, " ").trim(),
       keyWords: recipe.keyWords
         .replace(whitespaceRE, " ")
