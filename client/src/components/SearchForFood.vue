@@ -19,10 +19,11 @@
       <!-- search by keywords -->
 
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <b-form-group id="byKeyWords" label="Key Words" label-for="exampleInput2">
-          <b-form-input id="searchTitle" type="text" v-model="searchKeyWords" placeholder="Enter keywords">
-          </b-form-input>
-        </b-form-group>
+        <!-- <b-form-input id="searchTitle" type="text" v-model="searchKeyWords" placeholder="Enter keywords">
+          </b-form-input> -->
+        <multiselect v-model="searchKeyWords" :multiple="true" :options="keywordOptions" placeholder="Search by keywords" label="name"
+          track-by="name" class="mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputName2"></multiselect>
+
         <div class="text-center">
           <b-button type="submit" variant="primary" @click="searchByKeyWords">Submit</b-button>
           <b-button type="reset" variant="danger">Reset</b-button>
@@ -43,26 +44,31 @@
       </b-form>
 
     </div>
-<div>
+    <div>
       <ul>
         <li v-for="result in results">
           <b-card>
             <b-media no-body>
               <b-media-aside vertical-align="center">
-                <b-img width="250" height="400" alt="Miam Miam Pic" :src="result.url" style="width: 20rem; max-height: 50rem"
-                />
+                <b-img width="250" height="400" alt="Miam Miam Pic" :src="result.url" style="width: 20rem; max-height: 50rem" />
               </b-media-aside>
               <b-media-body class="ml-3">
                 <h3 class="mt-0">Title : {{result.title}}</h3>
                 <p>Cooking Indication:
                   <br>{{result.cookingTime}}
                 </p>
-                <p>
-                  {{result.keyWords}}
-                </p>
+                <p><span class="keyWord" v-for="keyWord in result.keyWords">{{keyWord}}</span></p>
                 <p>
                   Ingredients : {{result.indication}}
-                  <br>{{result.ingredients}}
+                <b-button v-if="btnShow" @click="kg=false ; btnShow=false" variant="warning">Switch to oz</b-button>
+                <b-button v-if="!btnShow" @click="kg=true ; btnShow=true" variant="primary">Switch to kg</b-button>
+                <br>
+                  <ul v-if="kg">
+                    <li v-for="ingredient in result.ingredients">{{ingredient}}</li>
+                  </ul>
+                  <ul v-elseif="!kg">
+                    <li v-for="ingredient in result.ingredientsUSA">{{ingredient}}</li>
+                  </ul>
                 </p>
                 <p>
                   <br>{{result.method}}
@@ -77,23 +83,33 @@
           </b-card>
         </li>
       </ul>
-</div>
+    </div>
   </section>
 </template>
 
 <script>
 import api from "../api";
+import Multiselect from "vue-multiselect";
+import optionKeyWords from "../../../server/data/keywords_food.json";
+
 export default {
   data() {
     return {
+      kg: true,
+      btnShow: true,
       searchTitle: "",
       ingredient: "",
+      keywordOptions: optionKeyWords,
       searchKeyWords: "",
       show: true,
       otherShow: true,
       results: []
     };
   },
+  components: {
+    Multiselect
+  },
+
   methods: {
     onSubmit(evt) {
       evt.preventDefault();

@@ -6,6 +6,7 @@ const recipeSchema = new Schema({
   method: String,
   indication: String,
   ingredients: [String],
+  ingredientsUSA: [String],
   cookingTime: String,
   keyWords: [String],
   url: String
