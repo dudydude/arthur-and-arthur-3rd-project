@@ -4,19 +4,19 @@
 <div class="text-center">
 <h2 class="has-text-centered">À Taaaaaable!!</h2>
 <div class="m-2">
-   <b-button @click="foorForm = `searchRecipe`" variant="warning">Il y a une zouze, j'claque du flooz</b-button>
+   <b-button @click="foorForm = `searchbyMood`" variant="warning">Food paired with my evening situation</b-button>
 </div>
 <div class="m-2">
-   <b-button @click="foorForm = `searchFridge`" variant="primary">J'ai les crocs, j'déglingue l'frigo!</b-button>
+   <b-button @click="foorForm = `searchFood`" variant="primary">J'ai les crocs, j'déglingue l'frigo!</b-button>
 </div>
 </div>
 
-<div v-if="foorForm === `searchRecipe`">
+<div v-if="foorForm === `searchbyMood`">
+<SearchByFoodMood class="m-5"/>
+</div>
+
+<div v-else-if="foorForm === `searchFood`">
 <SearchForFood class="m-5"/>
-</div>
-
-<div v-else-if="foorForm === `searchFridge`">
-<SearchByFridge class="m-5"/>
 </div>
 
 
@@ -29,7 +29,7 @@
 
 <script>
 import SearchForFood from "../components/SearchForFood";
-import SearchByFridge from "../components/SearchByFridge";
+import SearchByFoodMood from "../components/SearchByFoodMood";
 import api from "../api";
 
 export default {
@@ -46,7 +46,7 @@ export default {
 
   components: {
     SearchForFood,
-    SearchByFridge
+    SearchByFoodMood
   },
 
   methods: {

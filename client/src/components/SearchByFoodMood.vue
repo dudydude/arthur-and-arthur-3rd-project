@@ -4,33 +4,10 @@
 
     <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="ingredientForm"
-                    label="Cuisine Type"
-                    label-for="exampleInput2">
-        <b-form-input id="ingredients"
-                      type="text"
-                      v-model="form.ingredients"
-                      placeholder="Enter your ingredients">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group id="courseTypeForm"
-                    label="Which course?"
-                    label-for="exampleInput3">
-        <b-form-select id="courseType"
-                      :options="foods"
-                      v-model="form.food">
-        </b-form-select>
-      </b-form-group>
-      <b-form-group id="exampleGroup4">
-        <b-form-checkbox-group v-model="form.checked" id="exampleChecks">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
-      <div class="text-center">
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-      </div>
+      <router-link type="submit" variant="primary">Il y a une zouze, j'claque du flooz</router-link>
+      <router-link type="submit" variant="primary">Il y a les potos, on fait les gros</router-link>
+      <router-link type="submit" variant="primary">I'm a Sexy Bitch</router-link>
+      <router-link type="submit" variant="primary">In mood for some blood</router-link>
     </b-form>
   </div>
     </section>
