@@ -12,8 +12,8 @@
 
         </b-media-body>
       </b-media>
-      <b-button variant="primary" @click="selectMovie(movie.id)">Choose this movie</b-button>
       <router-link :to="`/mood`">Back to results</router-link>
+      <b-button variant="primary" @click="selectMovie(movie.id)">Choose this movie</b-button>
     </b-card>
 
     <p v-else>Loading</p>
@@ -24,29 +24,27 @@
 
 
 <script>
-  import api from "../api";
-
-  export default {
-    data() {
-      return {
-        movie: null,
-        poster: "http://image.tmdb.org/t/p/w185/",
-        results: null
-      };
-    },
-    created() {
-      api.getMovie(this.$route.params.id).then(movie => {
-        this.movie = movie;
-        console.log(this.movie);
+import api from "../api";
+export default {
+  data() {
+    return {
+      movie: null,
+      poster: "http://image.tmdb.org/t/p/w185/",
+      results: null
+    };
+  },
+  created() {
+    api.getMovie(this.$route.params.id).then(movie => {
+      this.movie = movie;
+      console.log(this.movie);
+    });
+  },
+  methods: {
+    selectMovie(id) {
+      api.selectMovie(id).then(res => {
+        alert(id);
       });
-    },
-
-    methods: {
-      selectMovie(id) {
-        api.selectMovie(id).then(res => {
-          alert(id);
-        });
-      }
     }
-  };
+  }
+};
 </script>

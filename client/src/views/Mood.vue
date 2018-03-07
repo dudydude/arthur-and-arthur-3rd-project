@@ -70,63 +70,59 @@
 </template>
 
 <script>
-import api from "../api";
-import Multiselect from "vue-multiselect";
-import dataKeyword from "../../../server/data/keywords_tmdb.json";
-import dataGenre from "../../../server/data/genre_tmdb.json";
+  import api from "../api";
+  import Multiselect from "vue-multiselect";
+  import dataKeyword from "../../../server/data/keywords_tmdb.json";
+  import dataGenre from "../../../server/data/genre_tmdb.json";
 
-export default {
-  data() {
-    return {
-      show: false,
-      // search: true;
-      query: "",
-      results: [],
-      keywordSearch: "",
-      options: dataKeyword,
-      genreSearch: "",
-      genre: dataGenre,
-      modal: false
-    };
-  },
 
-  components: {
-    Multiselect
-  },
-
-  methods: {
-    search(query) {
-      api.search(this.query).then(results => {
-        this.results = results;
-      });
+  export default {
+    data() {
+      return {
+        show: false,
+        // search: true;
+        query: "",
+        results: [],
+        keywordSearch: "",
+        options: dataKeyword,
+        genreSearch: "",
+        genre: dataGenre,
+        modal: false
+      };
     },
-
-    searchKeywords(keywordSearch) {
-      api.searchKeywords(this.keywordSearch).then(results => {
-        this.results = results;
-      });
+    components: {
+      Multiselect
     },
-
-    searchGenre(genreSearch) {
-      api.searchGenre(this.genreSearch).then(results => {
-        this.results = results;
-      });
-    },
-
-    selectMovie(id) {
-      api.selectMovie(id).then(res => {
-        this.modal = true;
-        console.log(this.modal);
-      });
-    },
-    computed: {}
-  }
-};
+    methods: {
+      search(query) {
+        api.search(this.query).then(results => {
+          this.results = results;
+        });
+      },
+      searchKeywords(keywordSearch) {
+        api.searchKeywords(this.keywordSearch).then(results => {
+          this.results = results;
+        });
+      },
+      searchGenre(genreSearch) {
+        api.searchGenre(this.genreSearch).then(results => {
+          this.results = results;
+        });
+      },
+      selectMovie(id) {
+        api.selectMovie(id).then(res => {
+          this.modal = true;
+          console.log(this.modal);
+        });
+      },
+      computed: {}
+    }
+  };
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
-.field {
-  display: flex;
-  flex-direction: row;
-}
+  .field {
+    display: flex;
+    flex-direction: row;
+  }
 </style>

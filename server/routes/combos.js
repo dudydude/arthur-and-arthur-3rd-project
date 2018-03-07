@@ -30,26 +30,33 @@ router.post(
   function(req, res) {
     movieFind.get(`/movie/${req.params.id}/keywords`).then(movieFound => {
       // je récupère les keywords liés au film choisi
+
       res.json(movieFound.data);
+      console.log(movieFound.data);
       // je récupère l'objet du film avec toutes ses infos
+
       movieFind.get(`/movie/${movieFound.data.id}`).then(movieObject => {
         const newCombo = {
           creator: req.user.id,
           movie: movieObject.data
         };
+
         //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
+
         Combo.create(newCombo);
 
         let combo = newCombo;
         let user = req.user.id;
 
         // je stock les keywords du moovie dans une array
+
         var keywords = [];
         for (var i = 0; i < movieFound.data.keywords.length; i++) {
-          //  console.log(movieFound.data.keywords[i].name);
           keywords.push(movieFound.data.keywords[i].name);
         }
+        console.log("this is movie keywords ===>" + keywords);
         // j'utilise l'array pour trouver des moods contenant les keywords
+
         Mood.findOne({
           keyWordMovie: { $in: keywords }
         }).exec((err, users) => {
@@ -58,11 +65,15 @@ router.post(
           } else {
             // si pas d'erreur, je récupère les infos du mood (notamment les keywords Marmiton)
             var keywordsFood = users.keyWordMarmiton;
+            console.log("this is the food keywords ===>" + keywordsFood);
+            console.log(users);
             // je récupère les recettes qui contiennet ces keywords
+
             Food.find({
-              keyWords: keywordsFood
-            }).exec((err, recipe) => {
-              let dish = { dish: recipe };
+              keyWords: { $in: keywordsFood }
+            }).exec((err, result) => {
+              let dish = { dish: result };
+              console.log(dish);
               if (err) {
                 console.error(err);
               } else {
@@ -74,6 +85,7 @@ router.post(
                   if (err) {
                     console.log("Something wrong when updating data!");
                   }
+                  console.log("this is the combo + food " + doc);
                 });
               }
             });
@@ -87,15 +99,63 @@ router.post(
 // add a dish to the combo
 
 router.post(
-  "/dish/:id",
+  "/recipes/:searchTitle",
   passport.authenticate("jwt", config.jwtSession),
+
   function(req, res) {
-    Combo.create({
-      creator: req.user.id,
-      dish: req.params.id
-    }).then(combo => {
-      res.json(combo);
-    });
+    service
+      .get(`/searchbytitle/${req.params.searchTitle}`)
+      .then(recipeFound => {
+        res.json(recipeFound.data);
+        console.log(recipeFound.data);
+        movieFind.get(`/movie/${recipeFound.data.id}`).then(movieObject => {
+          const newCombo = {
+            creator: req.user.id,
+            movie: movieObject.data
+          };
+
+          Combo.create(newCombo);
+          let combo = newCombo;
+          let user = req.user.id;
+          var keywords = [];
+          for (var i = 0; i < recipeFound.data.keywords.length; i++) {
+            keywords.push(recipeFound.data.keywords[i].name);
+          }
+          console.log("this is movie keywords ===>" + keywords);
+
+          Mood.findOne({
+            keyWordMovie: { $in: keywords }
+          }).exec((err, users) => {
+            if (err) {
+              next(err);
+            } else {
+              var keywordsFood = users.keyWordMarmiton;
+              console.log("this is the food keywords ===>" + keywordsFood);
+              console.log(users);
+
+              Food.find({
+                keyWords: { $in: keywordsFood }
+              }).exec((err, result) => {
+                let dish = { dish: result };
+                console.log(dish);
+                if (err) {
+                  console.error(err);
+                } else {
+                  Combo.findOneAndUpdate(combo, { $set: dish }, function(
+                    err,
+                    doc
+                  ) {
+                    if (err) {
+                      console.log("Something wrong when updating data!");
+                    }
+                    console.log("this is the combo + food " + doc);
+                  });
+                }
+              });
+            }
+          });
+        });
+      });
   }
 );
 

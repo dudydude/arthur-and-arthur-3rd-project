@@ -105,6 +105,16 @@ export default {
       });
   },
 
+  selectMovie(id) {
+    console.log("je suis la");
+    return service
+      .post(`combo/movie/${id}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error(err);
+      });
+  },
+
   // search for recipes
   searchRecipe(query) {
     return service
