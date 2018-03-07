@@ -29,38 +29,56 @@ router.post(
 
   function(req, res) {
     movieFind.get(`/movie/${req.params.id}/keywords`).then(movieFound => {
+      // je récupère les keywords liés au film choisi
       res.json(movieFound.data);
-      // console.log(movieFound.data);
+      // je récupère l'objet du film avec toutes ses infos
       movieFind.get(`/movie/${movieFound.data.id}`).then(movieObject => {
-        // console.log(movieObject.data);
         const newCombo = {
           creator: req.user.id,
           movie: movieObject.data
         };
+        //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
         Combo.create(newCombo);
 
         let combo = newCombo;
         let user = req.user.id;
-        // for (i in movieFound.data.keywords) {
-        let keywords = movieFound.data.keywords;
-        console.log(keywords.name);
 
-        Mood.findOne(
-          { keyWordMovie: { $in: { keywords } } },
-          // { results: { $elemMatch: { $gte: 80, $lt: 85 } } }
-          (req, response) => {
-            console.log("this is the mood ==+> " + response);
-            Food.find({ keyWords: response.keyWordMarmiton }, (req, res) => {
-              let dish = { dish: res };
-              Combo.findOneAndUpdate(combo, { $set: dish }, function(err, doc) {
-                if (err) {
-                  console.log("Something wrong when updating data!");
-                }
-              });
+        // je stock les keywords du moovie dans une array
+        var keywords = [];
+        for (var i = 0; i < movieFound.data.keywords.length; i++) {
+          //  console.log(movieFound.data.keywords[i].name);
+          keywords.push(movieFound.data.keywords[i].name);
+        }
+        // j'utilise l'array pour trouver des moods contenant les keywords
+        Mood.findOne({
+          keyWordMovie: { $in: keywords }
+        }).exec((err, users) => {
+          if (err) {
+            next(err);
+          } else {
+            // si pas d'erreur, je récupère les infos du mood (notamment les keywords Marmiton)
+            var keywordsFood = users.keyWordMarmiton;
+            // je récupère les recettes qui contiennet ces keywords
+            Food.find({
+              keyWords: keywordsFood
+            }).exec((err, recipe) => {
+              let dish = { dish: recipe };
+              if (err) {
+                console.error(err);
+              } else {
+                // retrouver le combo qui vient d'être créé et j'y ajoute les plats
+                Combo.findOneAndUpdate(combo, { $set: dish }, function(
+                  err,
+                  doc
+                ) {
+                  if (err) {
+                    console.log("Something wrong when updating data!");
+                  }
+                });
+              }
             });
           }
-        );
-        //  }
+        });
       });
     });
   }
