@@ -1,16 +1,16 @@
 <template>
     <section>
-<h2 class="m-2" v-if="otherShow">Enter what you've, we will do the rest for you:</h2>
-
-    <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <router-link type="submit" variant="primary">Il y a une zouze, j'claque du flooz</router-link>
-      <router-link type="submit" variant="primary">Il y a les potos, on fait les gros</router-link>
-      <router-link type="submit" variant="primary">I'm a Sexy Bitch</router-link>
-      <router-link type="submit" variant="primary">In mood for some blood</router-link>
-    </b-form>
-  </div>
+      <div id="chooseFoodMood">
+<h2 class="m-2 text-center" v-if="otherShow">How does your night tends to be:</h2>
+      <b-button @click="romance===true">Il y a une zouze, j'claque du flooz</b-button>
+      <b-button>Il y a les potos, on fait les gros</b-button>
+      <b-button>I feel like a Sexy Bitch</b-button>
+      <b-button>In mood for some blood</b-button>
+    </div>
+    <div id="foodRecoByMood">
+    </div>
     </section>
+
 </template>
 
 <script>

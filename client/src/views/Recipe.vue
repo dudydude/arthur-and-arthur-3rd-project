@@ -3,10 +3,8 @@
 
 <div class="text-center">
 <h2 class="has-text-centered">À Taaaaaable!!</h2>
-<div class="m-2">
+<div class="m-4">
    <b-button @click="foorForm = `searchbyMood`" variant="warning">Food paired with my evening situation</b-button>
-</div>
-<div class="m-2">
    <b-button @click="foorForm = `searchFood`" variant="primary">J'ai les crocs, j'déglingue l'frigo!</b-button>
 </div>
 </div>
@@ -50,18 +48,11 @@ export default {
   },
 
   methods: {
-    searchRecipe(query) {
-      api.searchRecipe(this.query).then(results => {
-        this.results = results;
-      });
-    },
-
     searchByKeyWords(keywordSearch) {
       api.searchByKeyWords(this.keywordSearch).then(results => {
         this.results = results;
       });
     },
-
     searchByIngredients(ingredients) {
       api.searchByIngredients(this.ingredients).then(results => {
         this.results = results;

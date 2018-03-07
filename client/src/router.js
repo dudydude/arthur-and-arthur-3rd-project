@@ -34,7 +34,6 @@ export default new Router({
         requiresAuth: true
       }
     },
-
     {
       path: "/mood",
       component: Mood
