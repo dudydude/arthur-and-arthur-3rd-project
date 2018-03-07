@@ -5,10 +5,6 @@ const service = axios.create({
     process.env.NODE_ENV === "production" ? "/api" : "http://localhost:3000/api"
 });
 
-// const movieFind = axios.create({
-//   baseURL: "https://api.themoviedb.org/3/"
-// });
-
 const errHandler = err => {
   console.error(err.response.data);
   throw err.response.data;
@@ -109,15 +105,48 @@ export default {
       });
   },
 
-  selectMovie(id) {
+  // search for recipes
+  searchRecipe(query) {
     return service
-      .post(`/combo/movie/${id}`)
-      .then(res => console.log("hello"))
+      .get(`/recipes/searchAll`, {
+        params: {
+          query
+        }
+      })
+      .then(res => res.data.results)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+  },
+
+  searchByKeyWords(searchKeyWords) {
+    return service
+      .get(`/recipes/searchbykeywords/${searchKeyWords}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+  },
+
+  searchByIngredients(ingredient) {
+    return service
+      .get(`/recipes/searchbyingredients/${ingredient}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+  },
+
+  searchByTitle(searchTitle) {
+    return service
+      .get(`/recipes/searchbytitle/${searchTitle}`)
+      .then(res => res.data)
       .catch(err => {
         console.error(err);
         throw err;
       });
   }
 };
-
-// search for movies

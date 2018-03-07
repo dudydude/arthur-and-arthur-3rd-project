@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
-import Food from "./views/Food.vue";
+import Recipe from "./views/Recipe.vue";
 import Mood from "./views/Mood.vue";
 import MovieCard from "./views/MovieCard.vue";
 import MoodList from "./views/MoodList.vue";
@@ -40,8 +40,8 @@ export default new Router({
       component: Mood
     },
     {
-      path: "/food",
-      component: Food
+      path: "/recipes",
+      component: Recipe
     },
     {
       path: "/movie/:id",
