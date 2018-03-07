@@ -1,7 +1,7 @@
 [
   {
     "name": "Carnivore",
-    "marmitonKeyword": ["tex-mex", "barbecue", "viande"],
-    "tmdbKeyword": ["blood", "meat", "cannibale", "butcher", "monster"]
+    "keyWordMarmiton": ["tex-mex", "barbecue", "viande"],
+    "keyWordMovie": ["blood", "meat", "cannibale", "butcher", "monster"]
   }
 ]

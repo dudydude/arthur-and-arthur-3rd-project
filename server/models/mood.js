@@ -7,4 +7,6 @@ moodSchema = new Schema({
   keyWordMarmiton: Array
 });
 
-var mood = mongoose.model("Mood", moodSchema);
+var Mood = mongoose.model("Mood", moodSchema);
+
+module.exports = Mood;
