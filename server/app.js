@@ -61,8 +61,7 @@ app.use("/api", authRoutes);
 app.use("/api/movie", require("./routes/movies"));
 app.use("/api/keyword", require("./routes/keywords"));
 app.use("/api/genre", require("./routes/genres"));
-
-//app.use("/api/food", require("./routes/food"));
+app.use("/api/recipes", require("./routes/recipes"));
 
 app.get(
   "/api/secret",

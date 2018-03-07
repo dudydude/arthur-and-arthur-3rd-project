@@ -19,9 +19,11 @@
 <SearchByFridge class="m-5"/>
 </div>
 
+
 <div class="m-5 px-5">
 <hr>
 </div>
+
 </section>
 </template>
 
@@ -33,9 +35,44 @@ import api from "../api";
 export default {
   data() {
     return {
-      foorForm: ""
+      foorForm: "",
+      results: [],
+      query: "",
+      keywordSearch: "",
+      ingredients: "",
+      title: ""
     };
   },
-  components: { SearchForFood, SearchByFridge }
+
+  components: {
+    SearchForFood,
+    SearchByFridge
+  },
+
+  methods: {
+    searchRecipe(query) {
+      api.searchRecipe(this.query).then(results => {
+        this.results = results;
+      });
+    },
+
+    searchByKeyWords(keywordSearch) {
+      api.searchByKeyWords(this.keywordSearch).then(results => {
+        this.results = results;
+      });
+    },
+
+    searchByIngredients(ingredients) {
+      api.searchByIngredients(this.ingredients).then(results => {
+        this.results = results;
+      });
+    },
+    searchByTitle(title) {
+      api.searchByTitle(this.title).then(results => {
+        this.results = results;
+      });
+    }
+  },
+  computed: {}
 };
 </script>

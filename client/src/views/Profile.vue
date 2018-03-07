@@ -19,7 +19,7 @@
 
       <p> Je cherche d'abord un plat et je vous laisse me surprendre avec un film </p>
       <br>
-      <router-link class="button-profile" to="/food">In mood for some food</router-link>
+      <router-link class="button-profile" to="/recipes">In mood for some food</router-link>
     </div>
     <div id="mood" class="tuto-container">
       <p> Je cherche d'abord un plat et je vous laisse me surprendre avec un film </p>

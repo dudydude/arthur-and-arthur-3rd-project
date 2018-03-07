@@ -5,9 +5,9 @@ const recipeSchema = new Schema({
   title: String,
   method: String,
   indication: String,
-  ingredients: String,
+  ingredients: [String],
   cookingTime: String,
-  keyWords: String,
+  keyWords: [String],
   url: String
 });
 
