@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 comboSchema = new Schema({
   creator: { type: Schema.Types.ObjectId, ref: "User" },
-  dish: { type: Schema.Types.ObjectId, ref: "Dish" },
+  dish: Array,
   movie: Array,
   wine: String
 });
