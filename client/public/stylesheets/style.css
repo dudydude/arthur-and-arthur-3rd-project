@@ -1,26 +1,38 @@
+/* FONT:
+font-family: 'Lilita One', cursive;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Montserrat Alternates', sans-serif;
+font-family: 'Montez', cursive; */
+
 h1,
 h3 {
-  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Montserrat Alternates", sans-serif !important;
+  margin: 0;
+  padding: 0;
 }
 
 h2,
 h4 {
-  font-family: "Lilita One", sans-serif;
+  font-family: "Lilita One", sans-serif !important;
+  margin: 0;
+  padding: 0;
 }
 
 h5 {
-  font-family: "Montez", sans-serif;
+  font-family: "Montez", sans-serif !important;
+  margin: 0;
+  padding: 0;
 }
 
 h6,
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
+  border: 0;
 }
 
-#navBar {
-  background-color: peru(234, 89, 11);
-}
+/* NAV BAR */
 
+/* OTHER */
 #b-card-group li {
   list-style: none;
 }

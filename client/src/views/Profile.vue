@@ -2,13 +2,13 @@
   <section class="text-center container">
     <div v-if="!movie">
        <h2>Let's Chill and Eat!</h2>
-      <h3 class="m-2 mt-5">How to use the app</h3>
-      <p class="text-justify mx-5 my-2">You want to choose your food before looking our recommendation of matching movies? -> Click on Recipes 
+      <h3 class="m-2 mt-3">How to use the app</h3>
+      <p class="text-center mx-5 my-2">You want to choose your food before looking our recommendation of matching movies? -> Click on Recipes 
         <br> You want to look first for a movie before making your dinner menu? -> Click on Movies</p>
       <hr class="m-1">
 
       <div id="food" class="tuto-container">
-        <b-button class="button-profile" to="/recipes">Recipes</b-button>
+        <b-button class="button-profile btn-primary" to="/recipes">Recipes</b-button>
         <b-button class="button-profile" @click="movie=true">Movies</b-button>
       </div>
 
@@ -50,3 +50,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.tuto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+</style>
+

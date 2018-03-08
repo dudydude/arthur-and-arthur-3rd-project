@@ -1,5 +1,5 @@
 <template>
-  <section class="m-5">
+  <section class="mt-5 container">
     <b-alert show variant="danger" has-icon v-if="error">
       {{ error.error }}
     </b-alert>
@@ -19,7 +19,7 @@
           </b-form-input>
       </b-form-group>
       <div class="text-center">
-      <b-button type="submit" variant="primary">Login</b-button>
+      <b-button type="submit" variant="outline-primary" class="btn-test">Login</b-button>
       </div>
     </b-form>
   </section>
@@ -53,3 +53,17 @@ export default {
   }
 };
 </script>
+
+<style>
+.btn-orange {
+  border-radius: 2rem;
+  color: white;
+  background-color: peru;
+  border: 0;
+}
+
+section {
+  min-height: 80vh;
+}
+</style>
+

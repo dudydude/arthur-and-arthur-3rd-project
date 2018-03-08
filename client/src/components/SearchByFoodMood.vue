@@ -1,7 +1,8 @@
 <template>
-    <section>
-      <div id="chooseFoodMood">
-<h2 class="m-2 text-center" v-if="otherShow">How does your night tends to be:</h2>
+  <section>
+    <div id="chooseFoodMood">
+      <h3 class="m-2 text-center" v-if="otherShow">What's the mood for tonight?</h3>
+      <hr class="mx-5 px-5">
       <b-button @click="romance===true">Il y a une zouze, j'claque du flooz</b-button>
       <b-button>Il y a les potos, on fait les gros</b-button>
       <b-button>I feel like a Sexy Bitch</b-button>
@@ -9,7 +10,7 @@
     </div>
     <div id="foodRecoByMood">
     </div>
-    </section>
+  </section>
 
 </template>
 
@@ -72,4 +73,3 @@ export default {
   computed: {}
 };
 </script>
-

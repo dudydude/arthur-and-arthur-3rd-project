@@ -2,10 +2,11 @@
 <section>
 
 <div class="text-center">
-<h2 class="has-text-centered">À Taaaaaable!!</h2>
+
+<h2 class="mt-3">À Taaaaaable!!</h2>
 <div class="m-4">
-   <b-button @click="foorForm = `searchbyMood`" variant="warning">Set up the dinner mood</b-button>
-   <b-button @click="foorForm = `searchFood`" variant="primary">J'ai les crocs, j'déglingue l'frigo!</b-button>
+   <b-button @click="foorForm = `searchbyMood`" class="btn-orange ">Set up dinner mood</b-button>
+   <b-button @click="foorForm = `searchFood`" class="btn-orange ">Look for a recipe</b-button>
 </div>
 </div>
 
@@ -19,7 +20,7 @@
 
 
 <div class="m-5 px-5">
-<hr>
+
 </div>
 
 </section>

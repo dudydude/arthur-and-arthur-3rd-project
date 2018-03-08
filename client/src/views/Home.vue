@@ -11,8 +11,6 @@
       <br>
       <router-link :to="`/profile`" class="button-profile m-3 btn">GO✨✨🚀</router-link>
       <br>
-      <br>
-      <hr class="m-3">
     </div>
   </div>
 </template>

@@ -1,63 +1,47 @@
 <template>
-<b-navbar toggleable="md" type="light" class="bg-warning text-white" variant="info" id="navBar">
-   
-  <b-navbar-brand>
-    <router-link class="navbar-item" to="/">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="../../public/images/chatlogo.png" alt="Logo" width="100rem" height="100rem"></a>
-    </router-link>
-    <div
-      class="navbar-nav mr-auto"
-      :class="{ 'is-active': isActive }"
-      @click="isActive = !isActive"
-    >
-   
-    </div>
-  </b-navbar-brand>
+  <b-navbar toggleable="md" type="light" class="bg-light" id="navBar">
+    <b-navbar-brand>
+      <router-link to="/">
+        <h3 class="text-white">
+          <img src="../../public/images/chatlogo.png" alt="Logo" id="logoNavBar" class="d-inline-block align-center">MDC
+        </h3>
+      </router-link>
+      <div class="navbar-nav mr-auto" :class="{ 'is-active': isActive }" @click="isActive = !isActive" />
+    </b-navbar-brand>
 
- <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
- <b-collapse is-nav id="nav_collapse">
-    <b-navbar-nav class="block-inline text-white rounded" :class="{ 'is-active': isActive }">
-     
-    </b-navbar-nav>
-    <b-navbar-nav class="ml-auto">
-      <b-nav-item> 
-          <div v-if="!$root.user">
-            <b-nav-item>
-              <router-link class="navbar-item" to="/login" @click.native="isActive = false">
-                Login
-              </router-link>
-            </b-nav-item>
-            <b-nav-item>
-              <router-link class="navbar-item" to="/signup" @click.native="isActive = false">
-                Signup
-              </router-link>
-            </b-nav-item>
-            <b-nav-item>
-              <router-link class="navbar-item" to="/about" @click.native="isActive = false">
-                About
-              </router-link>
-            </b-nav-item>
+    <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+    <b-collapse is-nav id="nav_collapse">
+      <b-navbar-nav class="block-inline d-flex flex-row-reverse" :class="{ 'is-active': isActive }"></b-navbar-nav>
 
+      <b-navbar-nav class="ml-auto">
+        <div v-if="!$root.user">
+          <b-nav-item>
+            <b-button class="btn-orange" to="/login" @click.native="isActive = false" variant="outline-primary">
+              Login
+            </b-button>
+            <b-button class="btn-orange" to="/signup" @click.native="isActive = false" variant="outline-primary">
+              Signup
+            </b-button>
+          </b-nav-item>
+        </div>
 
-          </div>
-          <div v-else>
-            <router-link class="navbar-item" to="/profile" @click.native="isActive = false">
-              <b-nav-item>
-                Hi {{ $root.user.username }}
-              </b-nav-item>
-            </router-link>
-            <b-nav-item>
-              <router-link class="navbar-item" to="/createcombo" @click.native="isActive = false">
-                Create new combo
-              </router-link>
-            </b-nav-item>
-            <b-nav-item>
-              <a class="navbar-item" @click="logout">
-                Logout
-              </a>
-            </b-nav-item>
-          </div>
-        </b-nav-item>
+        <div v-else>
+          <b-nav-item>
+            <b-button class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary">
+              Create new combo
+            </b-button>
+
+            <b-dropdown text="Play Games" variant="outline-primary" class="btn-orange text-white transparent">
+              <b-dropdown-item class="">Zloutch</b-dropdown-item>
+              <b-dropdown-item class="">Country Guessing Game</b-dropdown-item>
+              <b-dropdown-item class="">Pierre Lenoir and Friends</b-dropdown-item>
+            </b-dropdown>
+
+            <b-button @click="logout" variant="outline-primary" class="btn-orange">
+              Logout
+            </b-button>
+          </b-nav-item>
+        </div>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -82,3 +66,38 @@ export default {
   }
 };
 </script>
+
+<style>
+.btn-orange {
+  border-radius: 2rem;
+  color: white;
+  background-color: peru;
+  border: 0;
+}
+
+.dropdown-menu.show {
+  background-color: transparent !important;
+}
+
+.btn.btn-outline-primary.dropdown-toggle {
+  border: transparent !important;
+  color: white;
+}
+
+#logoNavBar {
+  max-height: 3.5em;
+}
+
+.bg-light,
+.navbar-light {
+  background-color: #bd2130 !important;
+}
+
+.navbar-brand {
+  margin: 0;
+}
+
+h3 {
+  margin-bottom: 0;
+}
+</style>
