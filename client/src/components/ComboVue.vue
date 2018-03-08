@@ -5,7 +5,7 @@
                 <b-button @click="showModal">
                     <h2> Montre moi ton combo </H2>
                 </b-button>
-                <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
+                <b-modal ref="myModalRef" hide-footer title="Using Component Methods" size="lg">
                     <div class="d-block text-center" v-if="movieOk === true">
 
 
@@ -13,7 +13,7 @@
                     <div v-else>
 
                         <div>
-                            <b-carousel id="carousel1" style="color: #333; border: 1px solid" controls indicators background="#fff" :interval="4000"
+                            <b-carousel id="carousel1" style="color: #333; border: 1px solid; " controls indicators background="#fff" :interval="4000"
                                 img-width="1024" img-height="400" v-model="slide" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
 
                                 <!-- Text slides with image -->
@@ -52,45 +52,44 @@
 </template>
 
 <script>
+import api from "../api";
 
-    import api from "../api";
-
-    export default {
-        props: ["result"],
-        data() {
-            return {
-                movies: [],
-                movieOk: true,
-                slide: 0,
-                sliding: null,
-                poster: "http://image.tmdb.org/t/p/w185/"
-            };
-        },
-        methods: {
-            showModal() {
-                this.$refs.myModalRef.show();
-            },
-            hideModal() {
-                this.$refs.myModalRef.hide();
-            },
-            selectRecipe(id) {
-                api.selectRecipe(id).then(res => {
-                    console.log("Im in ");
-                    console.log(res);
-                    this.movies = res.movie;
-                    this.movieOk = false;
-                });
-            },
-
-            created: function () {
-                console.log(this.result);
-            },
-            onSlideStart(slide) {
-                this.sliding = true;
-            },
-            onSlideEnd(slide) {
-                this.sliding = false;
-            }
-        }
+export default {
+  props: ["result"],
+  data() {
+    return {
+      movies: [],
+      movieOk: true,
+      slide: 0,
+      sliding: null,
+      poster: "http://image.tmdb.org/t/p/w185/"
     };
+  },
+  methods: {
+    showModal() {
+      this.$refs.myModalRef.show();
+    },
+    hideModal() {
+      this.$refs.myModalRef.hide();
+    },
+    selectRecipe(id) {
+      api.selectRecipe(id).then(res => {
+        console.log("Im in ");
+        console.log(res);
+        this.movies = res.movie;
+        this.movieOk = false;
+      });
+    },
+
+    created: function() {
+      console.log(this.result);
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
+    }
+  }
+};
 </script>

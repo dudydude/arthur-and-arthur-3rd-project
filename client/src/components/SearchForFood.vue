@@ -45,8 +45,11 @@
 
     </div>
     <div>
+      <b-button type="submit" variant="primary" @click="() => {page = Math.max(1, page-1)}">Previous Page</b-button>
+      Page: {{page}}
+      <b-button type="submit" variant="primary" @click="() => {page++}">Next Page</b-button>
       <ul>
-        <li v-for="result in results" :result="result">
+        <li v-for="result in results.slice(10*(page-1),10*page)">
           <b-card>
             <b-media no-body>
               <b-media-body class="ml-3">
@@ -104,13 +107,14 @@
 <script>
   import api from "../api";
   import Multiselect from "vue-multiselect";
-  import ComboVue from "../components/ComboVue.vue"
-  import optionKeyWords from "../../../server/data/keywords_food.json";
+  import ComboVue from "../components/ComboVue";
 
+  import optionKeyWords from "../../../server/data/keywords_food.json";
 
   export default {
     data() {
       return {
+        page: 1,
         kg: true,
         btnShow: true,
         searchTitle: "",
@@ -119,14 +123,15 @@
         searchKeyWords: "",
         showIt: true,
         otherShow: true,
-        results: [],
-        result: {}
+        results: []
       };
     },
     components: {
       Multiselect,
-      ComboVue,
+      ComboVue
     },
+
+
 
     methods: {
       showModal() {

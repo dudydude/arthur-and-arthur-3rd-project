@@ -10,7 +10,8 @@ const recipeSchema = new Schema({
   cookingTime: String,
   keyWords: [String],
   picURL: String,
-  url: String
+  url: String,
+  score: Number
 });
 
 var Recipe = mongoose.model("Recipe", recipeSchema);
