@@ -3,30 +3,21 @@
    
   <b-navbar-brand>
     <router-link class="navbar-item" to="/">
-      <img src="../../public/images/chatlogo.png" alt="Logo" width="100rem" height="100rem">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="../../public/images/chatlogo.png" alt="Logo" width="100rem" height="100rem"></a>
     </router-link>
     <div
       class="navbar-nav mr-auto"
       :class="{ 'is-active': isActive }"
       @click="isActive = !isActive"
     >
-      <!-- <span></span>
-      <span></span>
-      <span></span> -->
+   
     </div>
   </b-navbar-brand>
 
  <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
  <b-collapse is-nav id="nav_collapse">
-    <b-navbar-nav class="block-inline" :class="{ 'is-active': isActive }">
-      <b-nav-item>
-        <router-link
-          class="navbar-item" to="/about"
-          @click.native="isActive = false"
-        >
-          About
-        </router-link>
-      </b-nav-item>
+    <b-navbar-nav class="block-inline text-white rounded" :class="{ 'is-active': isActive }">
+     
     </b-navbar-nav>
     <b-navbar-nav class="ml-auto">
       <b-nav-item> 

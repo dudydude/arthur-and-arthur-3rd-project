@@ -63,7 +63,7 @@
                   <span class="keyWord" v-for="keyWord in result.keyWords">{{keyWord}}</span>
                 </p>
                 <hr class="m-5 px-5">
-                <p>
+                <div>
                   Ingredients : {{result.indication}}
 
                   <br>
@@ -77,7 +77,7 @@
                     <b-button v-if="btnShow" @click="kg=false ; btnShow=false" variant="warning btn-sm">Switch to oz</b-button>
                     <b-button v-if="!btnShow" @click="kg=true ; btnShow=true" variant="primary btn-sm">Switch to kg</b-button>
                   </div>
-                </p>
+                </div>
                 <p class="text-justify">
                   {{result.method}}
                 </p>

@@ -6,11 +6,13 @@
     </section>
 
     <footer class="footer">
-      <div class="container">
-        <div class="text-center">
-          <p><strong>Food & Mood Project</strong><br>made with ❤️ by Arthur & Arthur </p>
-            <p>- WebDev Project 2018 -</p>
-        </div>
+
+      <div class="text-center" slot="footer">
+        <p>
+          <strong>Food & Mood Project</strong>
+          <br>made with ❤️ by Arthur & Arthur </p>
+        <p>- WebDev Project 2018 -</p>
+
       </div>
     </footer>
   </div>
@@ -29,4 +31,3 @@ export default {
   }
 };
 </script>
-
