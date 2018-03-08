@@ -45,8 +45,7 @@ export default {
 
   components: {
     SearchForFood,
-    SearchByFoodMood,
-    ComboVue
+    SearchByFoodMood
   },
 
   methods: {

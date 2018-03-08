@@ -112,7 +112,7 @@ router.post(
       .get(`recipes/searchbytitle/${req.params.searchTitle}`)
       .then(recipeFound => {
         var recipeMatch = recipeFound.data[0];
-        //console.log("je suis curry ====>" + recipeMatch);
+        console.log("je suis curry ====>" + recipeMatch);
         const newCombo = {
           creator: req.user.id,
           dish: recipeMatch
@@ -121,7 +121,6 @@ router.post(
         //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
 
         Combo.create(newCombo);
-        // console.log(newCombo);
 
         var combo = newCombo;
         var user = req.user.id;
@@ -132,7 +131,7 @@ router.post(
           if (err) {
             console.error(err);
           }
-          //console.log("je match ==+> " + result);
+          console.log("je match ==+> " + result);
           let keyWordsMovie = result[0].keyWordMovie;
           console.log("voici les keywords a utilisé   ====> " + keyWordsMovie);
           // find the id of the keywords movie in the mood collection
