@@ -1,11 +1,11 @@
 <template>
   <section>
-    <h2 class="m-2" v-if="show">Enter what you're craving for, we will find it for you:</h2>
+    <h2 class="m-2" v-if="showIt">Enter what you're craving for, we will find it for you:</h2>
 
     <div>
       <!-- search by title -->
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="showIt">
         <b-form-group id="byRecipeName" label="Recipe name" label-for="exampleInput2">
           <b-form-input id="searchTitle" type="text" v-model="searchTitle" placeholder="Enter the name of a dish">
           </b-form-input>
@@ -18,7 +18,7 @@
 
       <!-- search by keywords -->
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="showIt">
         <!-- <b-form-input id="searchTitle" type="text" v-model="searchKeyWords" placeholder="Enter keywords">
           </b-form-input> -->
         <multiselect v-model="searchKeyWords" :multiple="true" :options="keywordOptions" placeholder="Search by keywords" label="name"
@@ -32,7 +32,7 @@
 
       <!-- search by ingredients -->
 
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="showIt">
         <b-form-group id="byIngredients" label="Ingredients" label-for="exampleInput2">
           <b-form-input id="searchTitle" type="text" v-model="ingredient" placeholder="Enter ingredients">
           </b-form-input>
@@ -87,6 +87,12 @@
                   <a :href="result.picURL">
                     <b-button class="primary">More Pictures</b-button>
                   </a>
+                  <combo-vue :result="result"></combo-vue>
+
+
+
+
+
                 </div>
               </b-media-body>
 
@@ -99,78 +105,81 @@
 </template>
 
 <script>
-import api from "../api";
-import Multiselect from "vue-multiselect";
-import ComboVue from "../components/ComboVue";
+  import api from "../api";
+  import Multiselect from "vue-multiselect";
+  import ComboVue from "../components/ComboVue";
 
-import optionKeyWords from "../../../server/data/keywords_food.json";
+  import optionKeyWords from "../../../server/data/keywords_food.json";
 
-export default {
-  data() {
-    return {
-      page: 1,
-      kg: true,
-      btnShow: true,
-      searchTitle: "",
-      ingredient: "",
-      keywordOptions: optionKeyWords,
-      searchKeyWords: "",
-      show: true,
-      otherShow: true,
-      results: []
-    };
-  },
-  components: {
-    Multiselect,
-    ComboVue
-  },
-
-  methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
+  export default {
+    data() {
+      return {
+        page: 1,
+        kg: true,
+        btnShow: true,
+        searchTitle: "",
+        ingredient: "",
+        keywordOptions: optionKeyWords,
+        searchKeyWords: "",
+        showIt: true,
+        otherShow: true,
+        results: []
+      };
+    },
+    components: {
+      Multiselect,
+      ComboVue
     },
 
-    onReset(evt) {
-      evt.preventDefault();
-      /* Reset our form values */
-      this.searchTitle = "";
-      this.ingredient = "";
-      this.searchKeyWords = "";
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false;
-      this.otherShow = false;
-      this.$nextTick(() => {
-        this.show = true;
-        this.otherShow = true;
-      });
-    },
-    searchByTitle(searchTitle) {
-      api.searchByTitle(this.searchTitle).then(results => {
-        this.results = results;
-      });
-    },
-    searchByIngredients(ingredient) {
-      api.searchByIngredients(this.ingredient).then(results => {
-        this.results = results;
-      });
-    },
-    searchByKeyWords(searchKeyWords) {
-      const justKeyWords = [];
-      const that = this;
-      for (let i = 0; i < that.searchKeyWords.length; i++) {
-        justKeyWords.push(that.searchKeyWords[i].name);
-      }
-      api.searchByKeyWords(justKeyWords).then(results => {
-        this.results = results;
-      });
-    },
 
-    selectRecipe(id) {
-      api.selectRecipe(id).then(res => {
-        console.log("Im in");
-        console.log(res);
-      });
+
+    methods: {
+      showModal() {
+        this.$refs.myModalRef.show()
+      },
+      hideModal() {
+        this.$refs.myModalRef.hide()
+      },
+      onSubmit(evt) {
+        evt.preventDefault();
+      },
+
+      onReset(evt) {
+        evt.preventDefault();
+        /* Reset our form values */
+        this.searchTitle = "";
+        this.ingredient = "";
+        this.searchKeyWords = "";
+        /* Trick to reset/clear native browser form validation state */
+        this.show = false;
+        this.otherShow = false;
+        this.$nextTick(() => {
+          this.showIt = true;
+          this.otherShow = true;
+        });
+      },
+      searchByTitle(searchTitle) {
+        api.searchByTitle(this.searchTitle).then(results => {
+          this.results = results;
+        });
+      },
+      searchByIngredients(ingredient) {
+        api.searchByIngredients(this.ingredient).then(results => {
+          this.results = results;
+        });
+      },
+      searchByKeyWords(searchKeyWords) {
+        const justKeyWords = [];
+        const that = this;
+        for (let i = 0; i < that.searchKeyWords.length; i++) {
+          justKeyWords.push(that.searchKeyWords[i].name);
+        }
+        api.searchByKeyWords(justKeyWords).then(results => {
+          this.results = results;
+        });
+      },
+
+
     }
-  }
-};
+  };
 </script>

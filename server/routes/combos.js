@@ -54,11 +54,11 @@ router.post(
 
         // je stock les keywords du moovie dans une array
 
-        var keywords = [];
-        for (var i = 0; i < movieFound.data.keywords.length; i++) {
-          keywords.push(movieFound.data.keywords[i].name);
-        }
-        console.log("this is movie keywords ===>" + keywords);
+        // var keywords = [];
+        // for (var i = 0; i < movieFound.data.keywords.length; i++) {
+        //   keywords.push(movieFound.data.keywords[i].name);
+        // }
+        console.log("this is movie keywords ===>" + movieFound.data.keywords);
         // j'utilise l'array pour trouver des moods contenant les keywords
 
         Mood.findOne({
@@ -68,13 +68,13 @@ router.post(
             next(err);
           } else {
             // si pas d'erreur, je récupère les infos du mood (notamment les keywords Marmiton)
+
             var keywordsFood = users.keyWordMarmiton;
-            console.log("this is the food keywords ===>" + keywordsFood);
-            console.log(users);
+            //console.log("this is the food keywords ===>" + keywordsFood.name);
             // je récupère les recettes qui contiennet ces keywords
 
             Food.find({
-              keyWords: { $in: keywordsFood }
+              keyWords: { $in: keywordsFood.name }
             }).exec((err, result) => {
               let dish = { dish: result };
               console.log(dish);
@@ -112,7 +112,7 @@ router.post(
       .get(`recipes/searchbytitle/${req.params.searchTitle}`)
       .then(recipeFound => {
         var recipeMatch = recipeFound.data[0];
-        //console.log("je suis curry ====>" + recipeMatch);
+        console.log("je suis curry ====>" + recipeMatch);
         const newCombo = {
           creator: req.user.id,
           dish: recipeMatch
@@ -121,7 +121,6 @@ router.post(
         //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
 
         Combo.create(newCombo);
-        // console.log(newCombo);
 
         var combo = newCombo;
         var user = req.user.id;
@@ -132,7 +131,7 @@ router.post(
           if (err) {
             console.error(err);
           }
-          //console.log("je match ==+> " + result);
+          console.log("je match ==+> " + result);
           let keyWordsMovie = result[0].keyWordMovie;
           console.log("voici les keywords a utilisé   ====> " + keyWordsMovie);
           // find the id of the keywords movie in the mood collection
@@ -184,6 +183,32 @@ router.post(
   }
 );
 
-//
+// Create a new combo
+
+router.post(
+  "/newMood",
+  //passport.authenticate("jwt", config.jwtSession),
+
+  (req, res, next) => {
+    const { name, keyWordMovie, keyWordMarmiton } = req.body;
+    const moodInfo = {
+      //creator: req.user.id,
+      name,
+      keyWordMovie,
+      keyWordMarmiton
+    };
+
+    console.log(moodInfo);
+    const newMood = new Mood(moodInfo);
+
+    newMood.save(err => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("succes"); // + newMood);
+      }
+    });
+  }
+);
 
 module.exports = router;

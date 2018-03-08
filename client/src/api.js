@@ -168,5 +168,14 @@ export default {
       .catch(err => {
         console.error(err);
       });
+  },
+
+  createMood(moodInfo) {
+    return service
+      .post("combo/newMood", moodInfo)
+      .then(res => res)
+      .catch(err => {
+        console.error(err + "<br>" + "this is the value of res ===+>" + res);
+      });
   }
 };

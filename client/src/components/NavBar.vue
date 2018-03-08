@@ -23,39 +23,44 @@
       <b-nav-item> 
           <div v-if="!$root.user">
             <b-nav-item>
-              <router-link
-                class="navbar-item" to="/login"
-                @click.native="isActive = false"
-              >
+              <router-link class="navbar-item" to="/login" @click.native="isActive = false">
                 Login
               </router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link
-                class="navbar-item" to="/signup"
-                @click.native="isActive = false"
-              >
+              <router-link class="navbar-item" to="/signup" @click.native="isActive = false">
                 Signup
               </router-link>
             </b-nav-item>
+            <b-nav-item>
+              <router-link class="navbar-item" to="/about" @click.native="isActive = false">
+                About
+              </router-link>
+            </b-nav-item>
+
+
           </div>
           <div v-else>
-              <router-link class="navbar-item" to="/profile" @click.native="isActive = false" >
-                  <b-nav-item>
-                      Hi {{ $root.user.username }}
-                  </b-nav-item>
+            <router-link class="navbar-item" to="/profile" @click.native="isActive = false">
+              <b-nav-item>
+                Hi {{ $root.user.username }}
+              </b-nav-item>
+            </router-link>
+            <b-nav-item>
+              <router-link class="navbar-item" to="/createcombo" @click.native="isActive = false">
+                Create new combo
               </router-link>
-
+            </b-nav-item>
             <b-nav-item>
               <a class="navbar-item" @click="logout">
                 Logout
               </a>
             </b-nav-item>
           </div>
-      </b-nav-item>
-    </b-navbar-nav>
-   </b-collapse>
-</b-navbar>
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
 </template>
 
 <script>

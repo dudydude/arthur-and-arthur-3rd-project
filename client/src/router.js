@@ -8,6 +8,7 @@ import Recipe from "./views/Recipe.vue";
 import Mood from "./views/Mood.vue";
 import MovieCard from "./views/MovieCard.vue";
 import MoodList from "./views/MoodList.vue";
+import ComboCreator from "./views/ComboCreator.vue";
 
 Vue.use(Router);
 
@@ -49,6 +50,10 @@ export default new Router({
     {
       path: "/moodlist",
       component: MoodList
+    },
+    {
+      path: "/createcombo",
+      component: ComboCreator
     }
   ]
 });
