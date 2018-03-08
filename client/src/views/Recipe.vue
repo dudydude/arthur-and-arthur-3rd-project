@@ -28,6 +28,7 @@
 <script>
 import SearchForFood from "../components/SearchForFood";
 import SearchByFoodMood from "../components/SearchByFoodMood";
+import ComboVue from "../components/ComboVue";
 import api from "../api";
 
 export default {
@@ -44,7 +45,8 @@ export default {
 
   components: {
     SearchForFood,
-    SearchByFoodMood
+    SearchByFoodMood,
+    ComboVue
   },
 
   methods: {
@@ -67,3 +69,10 @@ export default {
   computed: {}
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+.field {
+  display: flex;
+  flex-direction: row;
+}
+</style>

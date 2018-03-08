@@ -6,4 +6,6 @@ keywordSchema = new Schema({
   name: String
 });
 
-var Keywords = mongoose.model("Keywords", keywordsSchema);
+var Keyword = mongoose.model("Keyword", keywordSchema);
+
+module.exports = Keyword;

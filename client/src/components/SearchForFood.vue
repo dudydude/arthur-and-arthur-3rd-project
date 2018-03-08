@@ -66,7 +66,7 @@
                   <ul v-if="kg">
                     <li v-for="ingredient in result.ingredients">{{ingredient}}</li>
                   </ul>
-                  <ul v-elseif="!kg">
+                  <ul v-else="!kg">
                     <li v-for="ingredient in result.ingredientsUSA">{{ingredient}}</li>
                   </ul>
                 </p>
@@ -76,6 +76,9 @@
 
 
                 <b-button variant="primary" :to="`recipes/${result.id}`">See more</b-button>
+                
+                <combo-vue>
+                </combo-vue>
 
               </b-media-body>
 
@@ -90,6 +93,8 @@
 <script>
 import api from "../api";
 import Multiselect from "vue-multiselect";
+import ComboVue from "../components/ComboVue";
+
 import optionKeyWords from "../../../server/data/keywords_food.json";
 
 export default {
@@ -107,7 +112,8 @@ export default {
     };
   },
   components: {
-    Multiselect
+    Multiselect,
+    ComboVue
   },
 
   methods: {
@@ -142,6 +148,13 @@ export default {
     searchByKeyWords(searchKeyWords) {
       api.searchByKeyWords(this.searchKeyWords).then(results => {
         this.results = results;
+      });
+    },
+
+    selectRecipe(id) {
+      api.selectRecipe(id).then(res => {
+        console.log("Im in");
+        console.log(res);
       });
     }
   }

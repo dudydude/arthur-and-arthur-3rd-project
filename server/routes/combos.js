@@ -4,6 +4,7 @@ var axios = require("axios");
 var Combo = require("../models/combo");
 var Mood = require("../models/mood");
 var Food = require("../models/recipe");
+var Keyword = require("../models/keywordsTmdb");
 
 const jwt = require("jwt-simple");
 const passport = require("passport");
@@ -18,7 +19,9 @@ const movieFind = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   params: {
     api_key: "f04b2a25baed952b84af0eb4623bbc55",
-    inlude_adult: false
+    inlude_adult: false,
+    sort_by: "popularity.desc",
+    page: 1
   }
 });
 
@@ -33,6 +36,7 @@ router.post(
 
       res.json(movieFound.data);
       console.log(movieFound.data);
+
       // je récupère l'objet du film avec toutes ses infos
 
       movieFind.get(`/movie/${movieFound.data.id}`).then(movieObject => {
@@ -45,8 +49,8 @@ router.post(
 
         Combo.create(newCombo);
 
-        let combo = newCombo;
-        let user = req.user.id;
+        var combo = newCombo;
+        var user = req.user.id;
 
         // je stock les keywords du moovie dans une array
 
@@ -85,7 +89,8 @@ router.post(
                   if (err) {
                     console.log("Something wrong when updating data!");
                   }
-                  console.log("this is the combo + food " + doc);
+                  console.log("this is the combo + food   " + doc);
+                  res.json(doc);
                 });
               }
             });
@@ -104,58 +109,78 @@ router.post(
 
   function(req, res) {
     service
-      .get(`/searchbytitle/${req.params.searchTitle}`)
+      .get(`recipes/searchbytitle/${req.params.searchTitle}`)
       .then(recipeFound => {
-        res.json(recipeFound.data);
-        console.log(recipeFound.data);
-        movieFind.get(`/movie/${recipeFound.data.id}`).then(movieObject => {
-          const newCombo = {
-            creator: req.user.id,
-            movie: movieObject.data
-          };
+        var recipeMatch = recipeFound.data[0];
+        //console.log("je suis curry ====>" + recipeMatch);
+        const newCombo = {
+          creator: req.user.id,
+          dish: recipeMatch
+        };
 
-          Combo.create(newCombo);
-          let combo = newCombo;
-          let user = req.user.id;
-          var keywords = [];
-          for (var i = 0; i < recipeFound.data.keywords.length; i++) {
-            keywords.push(recipeFound.data.keywords[i].name);
+        //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
+
+        Combo.create(newCombo);
+        // console.log(newCombo);
+
+        var combo = newCombo;
+        var user = req.user.id;
+
+        Mood.find({
+          keyWordMarmiton: { $in: recipeMatch.keyWords }
+        }).exec((err, result) => {
+          if (err) {
+            console.error(err);
           }
-          console.log("this is movie keywords ===>" + keywords);
-
-          Mood.findOne({
-            keyWordMovie: { $in: keywords }
-          }).exec((err, users) => {
+          //console.log("je match ==+> " + result);
+          let keyWordsMovie = result[0].keyWordMovie;
+          console.log("voici les keywords a utilisé   ====> " + keyWordsMovie);
+          // find the id of the keywords movie in the mood collection
+          Keyword.find({ name: keyWordsMovie }).exec((err, result) => {
             if (err) {
-              next(err);
+              console.log("je suis erreur");
+              console.error(err);
             } else {
-              var keywordsFood = users.keyWordMarmiton;
-              console.log("this is the food keywords ===>" + keywordsFood);
-              console.log(users);
+              var resultKeyword = [];
 
-              Food.find({
-                keyWords: { $in: keywordsFood }
-              }).exec((err, result) => {
-                let dish = { dish: result };
-                console.log(dish);
-                if (err) {
-                  console.error(err);
-                } else {
-                  Combo.findOneAndUpdate(combo, { $set: dish }, function(
-                    err,
-                    doc
-                  ) {
-                    if (err) {
-                      console.log("Something wrong when updating data!");
-                    }
-                    console.log("this is the combo + food " + doc);
-                  });
-                }
-              });
+              for (i in result) {
+                resultKeyword.push(result[i].id);
+                console.log(resultKeyword);
+              }
+              // call the api tmdb to fetch movie that match the keywords              // et je les join en utilisant le séparateur de l'API, puis je lance la recherche
+              // let keywordQuery = resultKeyword.join("%2C%20");
+
+              // method join('|') same as OR
+              let keywordQuery = resultKeyword.join("%20%7C%20");
+
+              movieFind
+                .get("discover/movie?&with_keywords=" + keywordQuery)
+                .then(listOfMovies => {
+                  console.log(listOfMovies.data);
+                  if (err) {
+                    console.error(err);
+                  } else {
+                    // save it to the combo
+                    Combo.findOneAndUpdate(
+                      combo,
+                      { $set: { movie: listOfMovies.data.results } },
+                      function(err, doc) {
+                        if (err) {
+                          console.log("Something wrong when updating data!");
+                        }
+                        // console.log("this is the combo + food   " + doc);
+                        // console.log(doc.movie);
+                        res.json(doc);
+                      }
+                    );
+                  }
+                });
             }
           });
         });
       });
+
+    console.log("hello");
   }
 );
 

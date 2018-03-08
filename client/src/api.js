@@ -158,5 +158,15 @@ export default {
         console.error(err);
         throw err;
       });
+  },
+
+  selectRecipe(id) {
+    console.log("je suis la");
+    return service
+      .post(`combo/recipes/${id}`)
+      .then(res => res.data)
+      .catch(err => {
+        console.error(err);
+      });
   }
 };
