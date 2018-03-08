@@ -4,7 +4,7 @@
 <div class="text-center">
 <h2 class="has-text-centered">À Taaaaaable!!</h2>
 <div class="m-4">
-   <b-button @click="foorForm = `searchbyMood`" variant="warning">Food paired with my evening situation</b-button>
+   <b-button @click="foorForm = `searchbyMood`" variant="warning">Set up the dinner mood</b-button>
    <b-button @click="foorForm = `searchFood`" variant="primary">J'ai les crocs, j'déglingue l'frigo!</b-button>
 </div>
 </div>

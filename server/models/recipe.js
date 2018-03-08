@@ -9,6 +9,7 @@ const recipeSchema = new Schema({
   ingredientsUSA: [String],
   cookingTime: String,
   keyWords: [String],
+  picURL: String,
   url: String
 });
 

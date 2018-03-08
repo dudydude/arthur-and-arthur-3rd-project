@@ -49,37 +49,42 @@
         <li v-for="result in results">
           <b-card>
             <b-media no-body>
-              <b-media-aside vertical-align="center">
-                <b-img width="250" height="400" alt="Miam Miam Pic" :src="result.url" style="width: 20rem; max-height: 50rem" />
-              </b-media-aside>
               <b-media-body class="ml-3">
-                <h3 class="mt-0">Title : {{result.title}}</h3>
-                <p>Cooking Indication:
-                  <br>{{result.cookingTime}}
+                <div class="text-center">
+                  <h2 class="mt-0">{{result.title}}</h2>
+                </div>
+                <div class="text-center">
+                  <p>{{result.cookingTime}}</p>
+                </div>
+                <p class="text-center">
+                  <span class="keyWord" v-for="keyWord in result.keyWords">{{keyWord}}</span>
                 </p>
-                <p><span class="keyWord" v-for="keyWord in result.keyWords">{{keyWord}}</span></p>
+                <hr class="m-5 px-5">
                 <p>
                   Ingredients : {{result.indication}}
-                <b-button v-if="btnShow" @click="kg=false ; btnShow=false" variant="warning">Switch to oz</b-button>
-                <b-button v-if="!btnShow" @click="kg=true ; btnShow=true" variant="primary">Switch to kg</b-button>
-                <br>
+
+                  <br>
                   <ul v-if="kg">
                     <li v-for="ingredient in result.ingredients">{{ingredient}}</li>
                   </ul>
-                  <ul v-else="!kg">
+                  <ul v-if="!kg">
                     <li v-for="ingredient in result.ingredientsUSA">{{ingredient}}</li>
                   </ul>
+                  <div class="text-left">
+                    <b-button v-if="btnShow" @click="kg=false ; btnShow=false" variant="warning btn-sm">Switch to oz</b-button>
+                    <b-button v-if="!btnShow" @click="kg=true ; btnShow=true" variant="primary btn-sm">Switch to kg</b-button>
+                  </div>
                 </p>
-                <p>
-                  <br>{{result.method}}
+                <p class="text-justify">
+                  {{result.method}}
                 </p>
 
-
-                <b-button variant="primary" :to="`recipes/${result.id}`">See more</b-button>
-                
-                <combo-vue>
-                </combo-vue>
-
+                <div class="text-center">
+                  <b-button variant="primary" :to="`recipes/${result.id}`">See more</b-button>
+                  <a :href="result.picURL">
+                    <b-button class="primary">More Pictures</b-button>
+                  </a>
+                </div>
               </b-media-body>
 
             </b-media>
@@ -146,7 +151,12 @@ export default {
       });
     },
     searchByKeyWords(searchKeyWords) {
-      api.searchByKeyWords(this.searchKeyWords).then(results => {
+      const justKeyWords = [];
+      const that = this;
+      for (let i = 0; i < that.searchKeyWords.length; i++) {
+        justKeyWords.push(that.searchKeyWords[i].name);
+      }
+      api.searchByKeyWords(justKeyWords).then(results => {
         this.results = results;
       });
     },

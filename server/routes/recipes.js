@@ -21,8 +21,13 @@ router.get("/searchAll", function(req, res, next) {
 
 // find recipes based on ingredients
 router.get("/searchbyingredients/:ingredient", (req, res, next) => {
-  const ingredientsToRegex = new RegExp(req.params.ingredient);
-  Recipe.find({ ingredients: { $regex: ingredientsToRegex, $options: "i" } })
+  let orResearch = [];
+  let ingredientSplit = req.params.ingredient.split(" ");
+  ingredientSplit.forEach(ingredient => {
+    const regex = new RegExp(ingredient, "i");
+    orResearch.push({ ingredients: regex });
+  });
+  Recipe.find({ $or: orResearch })
     .then(recipe => {
       res.json(recipe);
     })
@@ -31,8 +36,15 @@ router.get("/searchbyingredients/:ingredient", (req, res, next) => {
 
 // find recipes based on keywords
 router.get("/searchbykeywords/:searchKeyWords", (req, res, next) => {
-  const keywordToRegex = new RegExp(req.params.searchKeyWords);
-  Recipe.find({ keyWords: { $regex: keywordToRegex, $options: "i" } })
+  console.log("keywords: ", req.params.searchKeyWords);
+  const keyWords = req.params.searchKeyWords.split(",");
+  let orResearch = [];
+  keyWords.forEach(keyWord => {
+    const regex = new RegExp(keyWord, "i");
+    orResearch.push({ keyWords: regex });
+  });
+  console.log("orResearch: ", orResearch);
+  Recipe.find({ $and: orResearch })
     .then(recipe => {
       res.json(recipe);
     })

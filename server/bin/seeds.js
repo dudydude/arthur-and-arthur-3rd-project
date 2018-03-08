@@ -32,7 +32,8 @@ const formatted = foodAPIRaw
       keyWords: recipe.keyWords
         .replace(whitespaceRE, " ")
         .trim()
-        .split(" - ")
+        .split(" - "),
+      picURL: recipe.url.replace("recipes/recipe", "recipes/recipe-picture")
     };
   });
 
