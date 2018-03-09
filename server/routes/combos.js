@@ -117,7 +117,6 @@ router.post(
 
         Combo.create(newCombo);
 
-        // var combo = newCombo;
         var user = req.user.id;
 
         Mood.find({
@@ -128,20 +127,18 @@ router.post(
           }
           console.log("je match ==+> " + result);
           let keyWordsMovie = result[0].keyWordMovie;
-          // console.log("voici les keywords a utilisé   ====> " + keyWordsMovie);
           // find the id of the keywords movie in the mood collection
           Keyword.find({ name: keyWordsMovie }).exec((err, result) => {
             if (err) {
-              //console.log("je suis erreur");
               console.error(err);
             } else {
               var resultKeyword = [];
 
               for (i in result) {
                 resultKeyword.push(result[i].id);
-                //console.log(resultKeyword);
               }
-              // call the api tmdb to fetch movie that match the keywords              // et je les join en utilisant le séparateur de l'API, puis je lance la recherche
+
+              // call the api tmdb to fetch movie that match the keywords
               // let keywordQuery = resultKeyword.join("%2C%20");
 
               // method join('|') same as OR
@@ -150,11 +147,9 @@ router.post(
               movieFind
                 .get("discover/movie?&with_keywords=" + keywordQuery)
                 .then(listOfMovies => {
-                  //console.log(listOfMovies.data);
                   if (err) {
                     console.error(err);
                   } else {
-                    //console.log(listOfMovies);
                     console.log("soyyyy ele comboooooo ==+> " + newCombo);
                     // save it to the combo
                     Combo.findOneAndUpdate(
@@ -164,7 +159,7 @@ router.post(
                         if (err) {
                           console.log("Something wrong when updating data!");
                         }
-                        // console.log("this is the combo + food   " + comboBoubou);
+
                         console.log(comBouBoubou);
                         res.json(comboBoubou);
                       }

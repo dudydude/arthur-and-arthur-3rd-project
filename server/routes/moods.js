@@ -3,6 +3,8 @@ var router = express.Router();
 var axios = require("axios");
 const Mood = require("../models/mood");
 const Food = require("../models/recipe");
+const Combo = require("../models/combo");
+const Keyword = require("../models/keywordsTmdb");
 
 const service = axios.create({
   baseURL:
@@ -40,39 +42,53 @@ router.get("/", function(req, res, next) {
 // get combo via a mood
 
 router.get("/:id", function(req, res, next) {
-  Mood.findById(req.params.id, function(err, moodChoose) {
+  Mood.findById(req.params.id, function(err, mood) {
     if (err) {
-      console.error(err);
+      //console.error(err);
     }
-    // console.log("j'ai récup ce bon vieux moood  " + moodChoose);
-  }).then(response => {
-    //  console.log("je suis response    " + response.keyWordMarmiton);
-    Food.find({ keyWords: { $in: response.keyWordMarmiton } })
-      .limit(6)
-      .exec((err, recipe) => {
-        if (err) {
-          console.error(err);
-        } else {
-          // console.log("je susi le recipe      " + recipe);
-          const newCombo = {
-            creator: req.user.id,
-            dish: recipe
-          };
-          Combo.create(newCombo);
-          console.log("je bloque");
-          // var keywordQuery = mooChoose.keyWordMovie.join("%20%7C%20");
-          // console.log(keywordQuery);
-          // movieFind
-          //   .get("discover/movie?&with_keywords=" + keywordQuery)
-          //   .catch(err => {
-          //     console.error(err);
-          //   });
+    console.log(mood);
+    Keyword.find({ name: { $in: mood.keyWordMovie } }).exec((err, result) => {
+      if (err) {
+        // console.error(err);
+      } else {
+        var resultKeyword = [];
+
+        for (i in result) {
+          resultKeyword.push(result[i].id);
         }
-      })
-      .catch(err => {
-        if (err) console.log(error);
-      });
+        var keywordQuery = mood.keyWordMovie.join("%20%7C%20");
+
+        movieFind
+          .get("discover/movie?&with_keywords=" + keywordQuery)
+          .then(listOfMovie => {
+            if (err) console.log(err);
+            else {
+              const newCombo = {
+                // creator: req.user.id,
+                movie: listOfMovie
+              };
+              //console.log(listOfMovie);
+
+              //   Combo.create(newCombo);
+              //   console.log("je bloque");
+              //   //console.log(keywordQuery);
+
+              console.log(mood.keyWordMovie);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    });
+    //console.log("je suis response    " + mood.keyWordMarmiton);
+    //     Food.find({ keyWords: { $in: mood.keyWordMarmiton } })
+    //       .limit(6)
+    //       .then(recipeObjet => {
+    //         Combo.findOneAndUpdate(newCombo, {
+    //           // $set: { movie: listOfMovie.data.results }
+    //         });
+    //       });
   });
 });
-
 module.exports = router;
