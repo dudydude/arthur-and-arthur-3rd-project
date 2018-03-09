@@ -1,9 +1,9 @@
 <template>
   <section class="text-center container my-5">
     <div v-if="!movie">
-       <h2>Let's Chill and Eat!</h2>
+      <h2>Let's Eat and Chill!</h2>
       <h3 class="m-2 mt-3">How to use the app</h3>
-      <p class="text-center mx-5 my-2">You want to choose your food before looking our recommendation of matching movies? -> Click on Recipes 
+      <p class="text-center mx-5 my-2">You want to choose your food before looking our recommendation of matching movies? -> Click on Recipes
         <br> You want to look first for a movie before making your dinner menu? -> Click on Movies</p>
       <hr class="m-1">
 
@@ -14,16 +14,16 @@
 
     </div>
     <div class="text-center" v-if="movie">
-      <h1> What are you looking for ? </h1>
       <div>
         <div>
-          <h2> Choose a mood and we will do the rest :</h2>
+          <h2>Need some inspiration...</h2>
+          <h5 class="mb-5"> Choose a mood and we will do the rest...</h5>
           <br>
-          <b-button :to="`/moodlist`" class="button-profile">Inspiration </b-button>
+          <b-button :to="`/moodlist`" class="button-profile mb-5">Mood</b-button>
         </div>
         <div>
-          <h2> May be you already have an idea
-            <br>(choose a movie and we will do the rest) :</h2>
+          <h2 class="mt-5"> or you already have an idea?</h2>
+          <h5 class="mb-5">Choose a movie and we will do the rest...</h5>
           <b-button class="button-profile" :to="`/mood`">Movie</b-button>
         </div>
       </div>
@@ -80,4 +80,3 @@ export default {
   border-radius: 50rem;
 }
 </style>
-

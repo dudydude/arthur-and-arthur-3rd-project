@@ -1,6 +1,6 @@
 <template>
   <div class="text-center container">
-    <h1 class="m-2 mt-3">Dine & Chill with Movies</h1>
+    <h2 class="m-2 mt-3">Dine & Chill<br>watching Movies</h2>
     <hr class="m-3">
     <div>
       <h3 class="m-2">The Concept - coz Netflix'nd Chill is out of date.</h3>

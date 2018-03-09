@@ -9,7 +9,7 @@
     <footer class="footer">
       <div class="text-center text-white">
         <br>
-        <h5>Movie, Dine & Chill</h5>
+        <h5>Dine & Chill watching Movies</h5>
         <h6>made with ❤️ by Arthur & Arthur</h6>
         <p>- WebDev Final Project 2018 -</p>
         <br>
@@ -41,6 +41,8 @@ html {
 .footer {
   background-color: rgb(255, 127, 19);
   width: 100vw;
+  border: solid 5px white;
+  border-radius: 2rem;
 }
 
 h6 {

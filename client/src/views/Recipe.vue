@@ -3,7 +3,7 @@
 
 <div class="text-center">
 
-<h2 class="mt-3">Diiinneeer Tiiime!!</h2>
+<h1 class="mt-3">Diiinneeer Tiiime!!</h1>
 <div class="m-4">
    <b-button @click="foorForm = `searchbyMood`" class="btn-orange m-4">Choose my mood</b-button>
    <b-button @click="foorForm = `searchFood`" class="btn-orange m-4">Look for a recipe</b-button>
