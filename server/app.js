@@ -63,7 +63,7 @@ app.use("/api/keyword", require("./routes/keywords"));
 app.use("/api/genre", require("./routes/genres"));
 app.use("/api/recipes", require("./routes/recipes"));
 app.use("/api/combo", require("./routes/combos"));
-app.use("/api/moods", require("./routes/moods"));
+app.use("/api/moodlist", require("./routes/moods"));
 
 //app.use("/api/food", require("./routes/food"));
 

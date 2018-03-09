@@ -112,13 +112,9 @@ router.post(
           creator: req.user.id,
           dish: recipeMatch
         };
-
-        //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
-
         Combo.create(newCombo);
-
         var user = req.user.id;
-
+        console.log(recipeMatch.keyWords);
         Mood.find({
           keyWordMarmiton: { $in: recipeMatch.keyWords }
         }).exec((err, result) => {
@@ -160,7 +156,7 @@ router.post(
                           console.log("Something wrong when updating data!");
                         }
 
-                        console.log(comBouBoubou);
+                        console.log(comboBoubou);
                         res.json(comboBoubou);
                       }
                     );

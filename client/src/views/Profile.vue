@@ -68,6 +68,9 @@ export default {
   color: white;
   font-size: 1.6rem;
   border-radius: 50rem;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .button-profile:hover {
@@ -79,5 +82,8 @@ export default {
   color: rgb(20, 143, 119);
   border: 4px solid rgb(20, 143, 119);
   border-radius: 50rem;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 </style>

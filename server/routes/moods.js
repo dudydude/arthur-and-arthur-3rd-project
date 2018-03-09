@@ -30,12 +30,10 @@ router.get("/", function(req, res, next) {
     }
     console.log(moods);
   })
+    .limit(5)
     .then(response => {
       res.json(response);
       console.log(response);
-    })
-    .catch(err => {
-      next(err);
     });
 });
 
@@ -43,52 +41,33 @@ router.get("/", function(req, res, next) {
 
 router.get("/:id", function(req, res, next) {
   Mood.findById(req.params.id, function(err, mood) {
-    if (err) {
-      //console.error(err);
-    }
-    console.log(mood);
-    Keyword.find({ name: { $in: mood.keyWordMovie } }).exec((err, result) => {
-      if (err) {
-        // console.error(err);
-      } else {
-        var resultKeyword = [];
-
-        for (i in result) {
-          resultKeyword.push(result[i].id);
-        }
-        var keywordQuery = mood.keyWordMovie.join("%20%7C%20");
-
-        movieFind
-          .get("discover/movie?&with_keywords=" + keywordQuery)
-          .then(listOfMovie => {
-            if (err) console.log(err);
-            else {
+    Keyword.find({ name: { $in: mood.keyWordMovie } }, function(err, keyword) {
+      var resultKeyword = [];
+      // console.log(keyword);
+      for (i in keyword) {
+        resultKeyword.push(keyword[i].id);
+      }
+      var keywordQuery = resultKeyword.join("%20%7C%20");
+      console.log(keywordQuery);
+      movieFind
+        .get("discover/movie?&with_keywords=" + keywordQuery)
+        .then(listOfMovie => {
+          // console.log(mood.keyWordMarmiton);
+          Food.find({ keyWords: { $in: mood.keyWordMarmiton } })
+            .limit(6)
+            .then(recipeObjet => {
+              console.log(recipeObjet);
               const newCombo = {
                 // creator: req.user.id,
-                movie: listOfMovie
+                movie: listOfMovie.data.results,
+                dish: recipeObjet
               };
-              //console.log(listOfMovie);
-
-              //   Combo.create(newCombo);
-              //   console.log("je bloque");
-              //   //console.log(keywordQuery);
-
-              console.log(mood.keyWordMovie);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
+              Combo.create(newCombo);
+              res.json(newCombo);
+            });
+        });
     });
-    //console.log("je suis response    " + mood.keyWordMarmiton);
-    //     Food.find({ keyWords: { $in: mood.keyWordMarmiton } })
-    //       .limit(6)
-    //       .then(recipeObjet => {
-    //         Combo.findOneAndUpdate(newCombo, {
-    //           // $set: { movie: listOfMovie.data.results }
-    //         });
-    //       });
   });
 });
+
 module.exports = router;
