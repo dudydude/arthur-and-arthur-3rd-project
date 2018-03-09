@@ -9,12 +9,14 @@
          <b-button class="m-3 btn-mood">Bromance</b-button>
           <b-button class="m-3 btn-mood">Play it like Maya</b-button>
         <b-button class="m-3 btn-mood">I feel like a Sexy Bitch</b-button>
-        <b-button class="m-3 btn-mood">In mood for some blood</b-button>
-         <b-button class="m-3 btn-mood">Girls night</b-button>
+        <b-button class="m-3 btn-mood">Girls night</b-button>
+        <b-button class="m-3 btn-mood">Home alone</b-button>
+        <b-button class="m-3 btn-mood">In mood for some blood</b-button>     
       </div>
     </div>
     <div id="foodRecoByMood">
     </div>
+      <hr class="mx-5 my-4">
   </section>
 
 </template>

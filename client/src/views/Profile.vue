@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-
+  <hr class="m-4">
   </section>
 </template>
 
