@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "postinstall": "cd server && npm install",
-    "start": "cd server && npm start"
+    "babel-polyfill": "^6.26.0",
+    "dotenv": "^5.0.1",
+    "express-history-api-fallback": "^2.2.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "cd server && npm install",
+    "start": "cd server && npm start"
   },
   "repository": {
     "type": "git",
