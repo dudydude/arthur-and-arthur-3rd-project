@@ -1,29 +1,37 @@
 <template>
-<section>
+  <section>
 
-<div class="text-center">
+    <div class="text-center">
 
-<h2 class="mt-3">Diiinneeer Tiiime!!</h2>
-<div class="m-4">
-   <b-button @click="foorForm = `searchbyMood`" class="btn-orange m-4">Choose my mood</b-button>
-   <b-button @click="foorForm = `searchFood`" class="btn-orange m-4">Look for a recipe</b-button>
-</div>
-</div>
+      <h1 class="mt-3">Diiinneeer Tiiime!!</h1>
+      <div class="m-4">
+        <div>
+          <h2>Craving for some movie-food pairing...</h2>
+          <h5 class="mb-5"> Choose a mood and we will do the rest...</h5>
+          <b-button @click="foorForm = `searchbyMood`" class="button-profile m-4" variant="outline-primary outline-secondary">Choose a mood</b-button>
+        </div>
+        <div>
+          <h2 class="mt-5"> or your stomach is calling for something?</h2>
+          <h5 class="mb-5">Choose a recipe and we will do the rest...</h5>
+          <b-button @click="foorForm = `searchFood`" class="button-profile m-4" variant="outline-primary outline-secondary">Look for a recipe</b-button>
+        </div>
+      </div>
+    </div>
 
-<div v-if="foorForm === `searchbyMood`">
-<SearchByFoodMood class="container"/>
-</div>
+    <div v-if="foorForm === `searchbyMood`">
+      <SearchByFoodMood class="container" />
+    </div>
 
-<div v-else-if="foorForm === `searchFood`">
-<SearchForFood class="container"/>
-</div>
+    <div v-else-if="foorForm === `searchFood`">
+      <SearchForFood class="container" />
+    </div>
 
 
-<div class="m-5 px-5">
+    <div class="m-5 px-5">
 
-</div>
+    </div>
 
-</section>
+  </section>
 </template>
 
 <script>
@@ -74,5 +82,36 @@ export default {
 .field {
   display: flex;
   flex-direction: row;
+}
+
+.button-profile {
+  padding: 2rem;
+  margin: 2%;
+  width: 25vh;
+  background-color: rgb(20, 143, 119);
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50rem;
+}
+
+.button-profile:hover {
+  padding: 2rem;
+  margin: 2%;
+  width: 30vh;
+  font-size: 2rem;
+  background-color: white;
+  color: rgb(20, 143, 119);
+  border: 4px solid rgb(20, 143, 119);
+  border-radius: 50rem;
+}
+
+btn .button-profile .m-4 .btn-outline-primary {
+  padding: 2rem;
+  margin: 2%;
+  width: 25vh;
+  background-color: rgb(20, 143, 119);
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50rem;
 }
 </style>

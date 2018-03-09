@@ -1,11 +1,11 @@
 <template>
   <b-navbar toggleable="md" type="dark" class="bg-light" id="navBar">
-    <b-navbar-brand>
-      <b-button class="btn-orange" href="/">
+    <b-navbar-brand class="btn-orangelogo" variant="outline">
+      <router-link to="/">
         <h3 class="text-white">
-          <img src="../../public/images/chatlogo.png" alt="Logo" id="logoNavBar" class="d-inline-block align-center">MDC
+          <img src="../../public/images/chatlogo.png" alt="Logo" id="logoNavBar" class="btn-orangelogo d-inline-block align-center">DCM
         </h3>
-      </b-button>
+      </router-link>
       <div class="navbar-nav mr-auto" :class="{ 'is-active': isActive }" @click="isActive = !isActive" />
     </b-navbar-brand>
 
@@ -17,28 +17,33 @@
         <div v-if="!$root.user">
           <b-nav-item>
             <b-button class="btn-orange" to="/login" @click.native="isActive = false" variant="outline-primary">
-              Login
+              <h6>Login</h6>
             </b-button>
             <b-button class="btn-orange" to="/signup" @click.native="isActive = false" variant="outline-primary">
-              Signup
+              <h6>Signup</h6>
             </b-button>
           </b-nav-item>
         </div>
 
         <div v-else>
           <b-nav-item>
-            <b-button class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary">
-              Create new combo
-            </b-button>
 
-            <b-dropdown text="Play Games" variant="outline-primary" class="btn-orange text-white transparent">
+            <b-dropdown id="dropDown" text="Play Games" variant="outline-primary" class="btn-orange text-white transparent">
               <b-dropdown-item class="">Zloutch</b-dropdown-item>
               <b-dropdown-item class="">Country Guessing Game</b-dropdown-item>
               <b-dropdown-item class="">Pierre Lenoir and Friends</b-dropdown-item>
             </b-dropdown>
 
+            <b-button class="btn-orange" to="/profile" @click.native="isActive = false" variant="outline-primary">
+              <h6>Profile</h6>
+            </b-button>
+
+            <b-button class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary">
+              <h6>Create new combo</h6>
+            </b-button>
+
             <b-button @click="logout" variant="outline-primary" class="btn-orange">
-              Logout
+              <h6>Logout</h6>
             </b-button>
           </b-nav-item>
         </div>
@@ -75,6 +80,14 @@ export default {
   border: 0;
 }
 
+.btn-orangelogo {
+  border-radius: 2rem;
+  border: transparent;
+  color: white;
+  background-color: rgb(255, 127, 19);
+  border: 0;
+}
+
 .dropdown-menu.show {
   background-color: transparent !important;
 }
@@ -95,5 +108,14 @@ export default {
 
 .navbar-brand {
   margin: 0;
+}
+
+#navBar {
+  border: solid 5px white;
+  border-radius: 2rem;
+}
+
+#dropDown {
+  font-size: 1.4rem !important;
 }
 </style>

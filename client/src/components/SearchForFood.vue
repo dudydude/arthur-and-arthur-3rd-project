@@ -1,8 +1,10 @@
 <template>
   <section class="container">
+    
     <div class="text-center">
-      <h1 class="m-2" v-if="showIt">Enter what you're craving for, we will find it for you:</h1>
+      <h3 class="m-2" v-if="showIt">Enter what you're craving for, we will find it for you:</h3>
     </div>
+    <hr class="mx-3">
     <div>
       <!-- search by title -->
 
@@ -45,14 +47,15 @@
 
     </div>
     <div>
-
-      <div class="text-center mt-4" v-if="results.length>0">
-        <b-button type="submit" variant="warning" @click="() => {page = Math.max(1, page-1)}">Previous Page</b-button>
-        <b-button type="submit" variant="warning" @click="() => {page++}">Next Page</b-button>
+<hr class="mx-3 my-2">
+ <div class="text-center mt-4" v-if="results.length>0">
+        <h2>PAGE {{page}}</h2>
       </div>
-      <div class="text-center mt-2" v-if="results.length>0">
-        <h5>page: {{page}}</h5>
+      <div class="text-center my-4" v-if="results.length>0">
+        <b-button type="submit" variant="warning" @click="() => {page = Math.max(1, page-1)}"><<</b-button>
+        <b-button type="submit" variant="warning" @click="() => {page++}">>></b-button>
       </div>
+     
 
     
       <ul>

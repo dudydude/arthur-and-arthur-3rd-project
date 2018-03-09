@@ -1,33 +1,27 @@
 <template>
   <section class="container">
 
-
-    <div>
-      <b-form inline>
-        <div class="field">
-          <label class="sr-only" for="inlineFormInputName2">Name</label>
-
-          <b-input class="mb-2 mr-sm-2 mb-sm-0" placeholder="Jane Doe" v-model="query" @submit.prevent.stop="search" />
-
-          <b-button @click="search"> OK </b-button>
+      <b-form id="movieSeach">
+        <div class="text-center mb-3">
+        <h5>- enter your search -</h5>
         </div>
-        <div class="field">
-
-          <multiselect v-model="keywordSearch" :options="options" placeholder="Search by keywords" label="name" track-by="name" class="mb-2 mr-sm-2 mb-sm-0"
-            id="inlineFormInputName2"></multiselect>
-          <b-button @click="searchKeywords"> OK </b-button>
-        </div>
-
-        <div class="field">
-
-          <multiselect v-model="genreSearch" :options="genre" placeholder="Search by genre" label="name" track-by="name">
-          </multiselect>
-          <b-button @click="searchGenre"> OK </b-button>
-        </div>
-
-
+        <b-form-group class="text-center">
+          <b-button @click="search" variant="success">
+            <b-form-input class="mt-2 mb-2 mr-sm-2 mb-sm-0" placeholder="Jane Doe" v-model="query" @submit.prevent.stop="search"></b-form-input>
+            <h3 class="pt-2">OK</h3>
+          </b-button>
+          <b-button @click="searchKeywords" variant="success">
+            <multiselect v-model="keywordSearch" :options="options" placeholder="Search by keywords" label="name" track-by="name" class="mt-2 mb-2 mr-sm-2 mb-sm-0"
+              id="inlineFormInputName2"></multiselect>
+            <h3 class="pt-3">OK</h3>
+          </b-button>
+          <b-button @click="searchGenre" variant="success">
+            <multiselect v-model="genreSearch" :options="genre" placeholder="Search by genre" label="name" track-by="name" class="mt-2">
+            </multiselect>
+            <h3 class="pt-2">OK</h3>
+          </b-button>
+        </b-form-group>
       </b-form>
-    </div>
 
     <div>
       <ul>
@@ -130,8 +124,18 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css">
-.field {
+#movieSeach {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+}
+
+.btn-orange {
+  border-radius: 2rem;
+  color: white;
+  width: 15vh;
+  background-color: rgb(20, 143, 119);
+  border: 0;
+  padding: 10rem;
 }
 </style>
