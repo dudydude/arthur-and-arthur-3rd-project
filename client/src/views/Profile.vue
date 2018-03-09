@@ -1,5 +1,5 @@
 <template>
-  <section class="text-center container">
+  <section class="text-center container my-5">
     <div v-if="!movie">
        <h2>Let's Chill and Eat!</h2>
       <h3 class="m-2 mt-3">How to use the app</h3>
@@ -8,7 +8,7 @@
       <hr class="m-1">
 
       <div id="food" class="tuto-container">
-        <b-button class="button-profile btn-primary" to="/recipes">Recipes</b-button>
+        <b-button class="button-profile" to="/recipes">Recipes</b-button>
         <b-button class="button-profile" @click="movie=true">Movies</b-button>
       </div>
 
@@ -57,6 +57,27 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100px;
+}
+
+.button-profile {
+  padding: 2rem;
+  margin: 2%;
+  width: 25vh;
+  background-color: rgb(20, 143, 119);
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50rem;
+}
+
+.button-profile:hover {
+  padding: 2rem;
+  margin: 2%;
+  width: 30vh;
+  font-size: 2rem;
+  background-color: white;
+  color: rgb(20, 143, 119);
+  border: 4px solid rgb(20, 143, 119);
+  border-radius: 50rem;
 }
 </style>
 

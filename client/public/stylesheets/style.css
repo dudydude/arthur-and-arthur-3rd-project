@@ -37,24 +37,6 @@ body {
   list-style: none;
 }
 
-.button-profile {
-  padding: 2rem;
-  margin: 2%;
-  width: 300px;
-  background-color: blue;
-  color: white;
-  font-size: 1.6rem;
-}
-
-.button-profile:hover {
-  padding: 2rem;
-  margin: 2%;
-  width: 20rem;
-  background-color: white;
-  color: blue;
-  border: 1px solid blue;
-}
-
 .tuto-container {
   margin: 10%;
 }

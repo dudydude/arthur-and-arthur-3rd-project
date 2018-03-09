@@ -3,19 +3,19 @@
 
 <div class="text-center">
 
-<h2 class="mt-3">À Taaaaaable!!</h2>
+<h2 class="mt-3">Diiinneeer Tiiime!!</h2>
 <div class="m-4">
-   <b-button @click="foorForm = `searchbyMood`" class="btn-orange ">Set up dinner mood</b-button>
-   <b-button @click="foorForm = `searchFood`" class="btn-orange ">Look for a recipe</b-button>
+   <b-button @click="foorForm = `searchbyMood`" class="btn-orange m-4">Choose my mood</b-button>
+   <b-button @click="foorForm = `searchFood`" class="btn-orange m-4">Look for a recipe</b-button>
 </div>
 </div>
 
 <div v-if="foorForm === `searchbyMood`">
-<SearchByFoodMood class="m-5"/>
+<SearchByFoodMood class="container"/>
 </div>
 
 <div v-else-if="foorForm === `searchFood`">
-<SearchForFood class="m-5"/>
+<SearchForFood class="container"/>
 </div>
 
 

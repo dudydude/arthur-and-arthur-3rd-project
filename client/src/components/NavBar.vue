@@ -1,11 +1,11 @@
 <template>
-  <b-navbar toggleable="md" type="light" class="bg-light" id="navBar">
+  <b-navbar toggleable="md" type="dark" class="bg-light" id="navBar">
     <b-navbar-brand>
-      <router-link to="/">
+      <b-button class="btn-orange" href="/">
         <h3 class="text-white">
           <img src="../../public/images/chatlogo.png" alt="Logo" id="logoNavBar" class="d-inline-block align-center">MDC
         </h3>
-      </router-link>
+      </b-button>
       <div class="navbar-nav mr-auto" :class="{ 'is-active': isActive }" @click="isActive = !isActive" />
     </b-navbar-brand>
 
@@ -71,7 +71,7 @@ export default {
 .btn-orange {
   border-radius: 2rem;
   color: white;
-  background-color: peru;
+  background-color: rgb(255, 127, 19);
   border: 0;
 }
 
@@ -90,14 +90,10 @@ export default {
 
 .bg-light,
 .navbar-light {
-  background-color: #bd2130 !important;
+  background-color: rgb(255, 127, 19) !important;
 }
 
 .navbar-brand {
   margin: 0;
-}
-
-h3 {
-  margin-bottom: 0;
 }
 </style>

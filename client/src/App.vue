@@ -7,7 +7,7 @@
     </section>
 
     <footer class="footer">
-      <div class="text-center">
+      <div class="text-center text-white">
         <br>
         <h5>Movie, Dine & Chill</h5>
         <h6>made with ❤️ by Arthur & Arthur</h6>
@@ -35,13 +35,11 @@ export default {
 
 <style>
 html {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .footer {
-  background-color: #bd2130;
-  position: absolute;
-  bottom: 0;
+  background-color: rgb(255, 127, 19);
   width: 100vw;
 }
 

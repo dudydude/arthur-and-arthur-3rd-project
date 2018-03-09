@@ -58,7 +58,7 @@ export default {
 .btn-orange {
   border-radius: 2rem;
   color: white;
-  background-color: peru;
+  background-color: rgb(255, 127, 19);
   border: 0;
 }
 
