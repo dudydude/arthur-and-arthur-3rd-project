@@ -34,15 +34,15 @@
               <b-dropdown-item class="">Pierre Lenoir and Friends</b-dropdown-item>
             </b-dropdown>
 
-            <b-button id="btnProfile" class="btn-orange" to="/profile" @click.native="isActive = false" variant="utline-primary outline-secondary">
+            <b-button id="btnProfile" class="btn-orange" to="/profile" @click.native="isActive = false" variant="outline-primary outline-secondary">
               <h6>Profile</h6>
             </b-button>
 
-            <b-button id="btnCreaCombo" class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="utline-primary outline-secondary">
+            <b-button id="btnCreaCombo" class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary outline-secondary">
               <h6>Create new combo</h6>
             </b-button>
 
-            <b-button id="btnLogout" @click="logout" variant="utline-primary outline-secondary" class="btn-orange">
+            <b-button id="btnLogout" @click="logout" variant="outline-primary outline-secondary" class="btn-orange">
               <h6>Logout</h6>
             </b-button>
           </b-nav-item>
@@ -73,13 +73,6 @@ export default {
 </script>
 
 <style>
-.btn-orange {
-  border-radius: 2rem;
-  color: white;
-  background-color: rgb(255, 127, 19);
-  border: 0;
-}
-
 .btn-orangelogo {
   border-radius: 2rem;
   border: transparent;
@@ -101,10 +94,27 @@ export default {
 #dropDown,
 #btnLogout,
 #btnCreaCombo,
-#dropDown {
+#dropDown,
+#btnProfile {
   border: transparent !important;
   color: white;
+  background-color: rgb(255, 127, 19);
+  border-radius: 2rem;
 }
+
+#btnLogin:hover,
+#btnSignup:hover,
+#dropDown:hover,
+#btnLogout:hover,
+#btnCreaCombo:hover,
+#dropDown:hover,
+#btnProfile:hover {
+  border: transparent !important;
+  color: rgb(255, 127, 19);
+  background-color: white;
+  border: 0;
+}
+
 #logoNavBar {
   max-height: 3.5em;
 }

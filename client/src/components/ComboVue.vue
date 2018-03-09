@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <div>
     <div>
       <div>
-        <b-button @click="showModal">
-          <h2> See more </H2>
+        <b-button id="btnSeeMore" @click="showModal">
+          <h2> See more </h2>
         </b-button>
         <b-modal ref="myModalRef" hide-footer title="Best combo for the best user" size="lg">
           <div class="d-block text-center">
@@ -132,79 +132,99 @@
 
     </div>
 
-  </section>
+  </div>
 </template>
 
 <script>
-  import api from "../api";
+import api from "../api";
 
-  export default {
-    props: ["result"],
-    data() {
-      return {
-        results: [],
-        //movieOk: true,
-        slide: 0,
-        sliding: null,
-        poster: "http://image.tmdb.org/t/p/w185/",
-        path: true,
-        select: false,
-        secondSate: false
-      };
+export default {
+  props: ["result"],
+  data() {
+    return {
+      results: [],
+      //movieOk: true,
+      slide: 0,
+      sliding: null,
+      poster: "http://image.tmdb.org/t/p/w185/",
+      path: true,
+      select: false,
+      secondSate: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.$refs.myModalRef.show();
     },
-    methods: {
-      showModal() {
-        this.$refs.myModalRef.show();
-      },
-      hideModal() {
-        this.$refs.myModalRef.hide();
-      },
-      selectRecipe(id) {
-        api.selectRecipe(id).then(res => {
-          console.log("Im in Disheeeees");
-          console.log(res);
-          this.results = res;
-          this.select = true;
-          this.secondState = true;
-        });
-      },
-
-      selectMovie(id) {
-        api.selectMovie(id).then(res => {
-          console.log(res);
-          console.log(res);
-          this.results = res;
-          this.select = true;
-          this.secondState = true;
-          // this.movieOk = false;
-        });
-      },
-
-      onSlideStart(slide) {
-        this.sliding = true;
-      },
-      onSlideEnd(slide) {
-        this.sliding = false;
-      }
+    hideModal() {
+      this.$refs.myModalRef.hide();
     },
-    created() {
-      console.log(this.result);
-      this.secondSate = false;
-      this.select = false;
+    selectRecipe(id) {
+      api.selectRecipe(id).then(res => {
+        console.log("Im in Disheeeees");
+        console.log(res);
+        this.results = res;
+        this.select = true;
+        this.secondState = true;
+      });
+    },
 
-      if (this.$route.name === "mood") {
-        this.path = true;
-        api.selectMovie(id).then(res => {
-          console.log(res);
-          console.log(res);
-          this.results = res;
-          this.select = true;
-          // this.movieOk = false;
-        });
-      } else this.path = false;
+    selectMovie(id) {
+      api.selectMovie(id).then(res => {
+        console.log(res);
+        console.log(res);
+        this.results = res;
+        this.select = true;
+        this.secondState = true;
+        // this.movieOk = false;
+      });
+    },
+
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
     }
-  };
+  },
+  created() {
+    console.log(this.result);
+    this.secondSate = false;
+    this.select = false;
+
+    if (this.$route.name === "mood") {
+      this.path = true;
+      api.selectMovie(id).then(res => {
+        console.log(res);
+        console.log(res);
+        this.results = res;
+        this.select = true;
+        // this.movieOk = false;
+      });
+    } else this.path = false;
+  }
+};
 </script>
 
 <style>
+#btnSeeMore {
+  padding: 2rem;
+  margin: 2%;
+  width: 45vh;
+  background-color: rgb(20, 143, 119) !important;
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50rem;
+}
+
+#btnSeeMore:hover {
+  padding: 2rem;
+  margin: 2%;
+  width: 50vh;
+  font-size: 2rem;
+  background-color: white;
+  color: rgb(20, 143, 119);
+  border: 4px solid rgb(20, 143, 119);
+  border-radius: 50rem;
+}
 </style>
