@@ -1,0 +1,27 @@
+{
+  "name": "arthur-and-arthur-3rd-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "postinstall": "cd server && npm install",
+    "start": "cd server && npm start",
+    "dotenv": "^5.0.1",
+    "express-history-api-fallback": "^2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dudydude/arthur-and-arthur-3rd-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dudydude/arthur-and-arthur-3rd-project/issues"
+  },
+  "homepage": "https://github.com/dudydude/arthur-and-arthur-3rd-project#readme"
+}
