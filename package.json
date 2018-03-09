@@ -5,9 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "postinstall": "cd server && npm install",
-    "start": "cd server && npm start",
-    "dotenv": "^5.0.1",
-    "express-history-api-fallback": "^2.2.1"
+    "start": "cd server && npm start"
   },
   "devDependencies": {},
   "scripts": {
