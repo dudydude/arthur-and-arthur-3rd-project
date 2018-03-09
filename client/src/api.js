@@ -109,7 +109,7 @@ export default {
     console.log("je suis la");
     return service
       .post(`combo/movie/${id}`)
-      .then(res => res.data)
+      .then(res => res)
       .catch(err => {
         console.error(err);
       });

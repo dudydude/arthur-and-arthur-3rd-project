@@ -87,7 +87,7 @@
                   <a :href="result.picURL">
                     <b-button class="primary">More Pictures</b-button>
                   </a>
-                  <combo-vue :result="result"></combo-vue>
+                  <combo-vue :result="result" @click="selectFood(result.title)"></combo-vue>
 
 
 
@@ -105,81 +105,86 @@
 </template>
 
 <script>
-  import api from "../api";
-  import Multiselect from "vue-multiselect";
-  import ComboVue from "../components/ComboVue";
+import api from "../api";
+import Multiselect from "vue-multiselect";
+import ComboVue from "../components/ComboVue";
 
-  import optionKeyWords from "../../../server/data/keywords_food.json";
+import optionKeyWords from "../../../server/data/keywords_food.json";
 
-  export default {
-    data() {
-      return {
-        page: 1,
-        kg: true,
-        btnShow: true,
-        searchTitle: "",
-        ingredient: "",
-        keywordOptions: optionKeyWords,
-        searchKeyWords: "",
-        showIt: true,
-        otherShow: true,
-        results: []
-      };
+export default {
+  data() {
+    return {
+      page: 1,
+      kg: true,
+      btnShow: true,
+      searchTitle: "",
+      ingredient: "",
+      keywordOptions: optionKeyWords,
+      searchKeyWords: "",
+      showIt: true,
+      otherShow: true,
+      results: []
+    };
+  },
+  components: {
+    Multiselect,
+    ComboVue
+  },
+
+  methods: {
+    showModal() {
+      this.$refs.myModalRef.show();
     },
-    components: {
-      Multiselect,
-      ComboVue
+    hideModal() {
+      this.$refs.myModalRef.hide();
+    },
+    onSubmit(evt) {
+      evt.preventDefault();
     },
 
+    onReset(evt) {
+      evt.preventDefault();
+      /* Reset our form values */
+      this.searchTitle = "";
+      this.ingredient = "";
+      this.searchKeyWords = "";
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false;
+      this.otherShow = false;
+      this.$nextTick(() => {
+        this.showIt = true;
+        this.otherShow = true;
+      });
+    },
+    searchByTitle(searchTitle) {
+      api.searchByTitle(this.searchTitle).then(results => {
+        this.results = results;
+      });
+    },
+    searchByIngredients(ingredient) {
+      api.searchByIngredients(this.ingredient).then(results => {
+        this.results = results;
+      });
+    },
+    searchByKeyWords(searchKeyWords) {
+      const justKeyWords = [];
+      const that = this;
+      for (let i = 0; i < that.searchKeyWords.length; i++) {
+        justKeyWords.push(that.searchKeyWords[i].name);
+      }
+      api.searchByKeyWords(justKeyWords).then(results => {
+        this.results = results;
+      });
+    },
 
-
-    methods: {
-      showModal() {
-        this.$refs.myModalRef.show()
-      },
-      hideModal() {
-        this.$refs.myModalRef.hide()
-      },
-      onSubmit(evt) {
-        evt.preventDefault();
-      },
-
-      onReset(evt) {
-        evt.preventDefault();
-        /* Reset our form values */
-        this.searchTitle = "";
-        this.ingredient = "";
-        this.searchKeyWords = "";
-        /* Trick to reset/clear native browser form validation state */
-        this.show = false;
-        this.otherShow = false;
-        this.$nextTick(() => {
-          this.showIt = true;
-          this.otherShow = true;
-        });
-      },
-      searchByTitle(searchTitle) {
-        api.searchByTitle(this.searchTitle).then(results => {
-          this.results = results;
-        });
-      },
-      searchByIngredients(ingredient) {
-        api.searchByIngredients(this.ingredient).then(results => {
-          this.results = results;
-        });
-      },
-      searchByKeyWords(searchKeyWords) {
-        const justKeyWords = [];
-        const that = this;
-        for (let i = 0; i < that.searchKeyWords.length; i++) {
-          justKeyWords.push(that.searchKeyWords[i].name);
-        }
-        api.searchByKeyWords(justKeyWords).then(results => {
-          this.results = results;
-        });
-      },
-
-
+    selectRecipe(id) {
+      api.selectRecipe(id).then(res => {
+        console.log("Im in Disheeeees");
+        console.log(res);
+        this.results = res;
+        // this.movieOk = false;
+      });
     }
-  };
+  }
+};
 </script>

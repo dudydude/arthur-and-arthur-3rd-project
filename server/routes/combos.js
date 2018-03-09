@@ -33,67 +33,62 @@ router.post(
   function(req, res) {
     movieFind.get(`/movie/${req.params.id}/keywords`).then(movieFound => {
       // je récupère les keywords liés au film choisi
-
-      res.json(movieFound.data);
-      console.log(movieFound.data);
+      //res.json(movieFound.data);
+      //console.log(movieFound.data);
 
       // je récupère l'objet du film avec toutes ses infos
 
       movieFind.get(`/movie/${movieFound.data.id}`).then(movieObject => {
+        console.log("je suis movie object data    ==>" + movieObject);
         const newCombo = {
           creator: req.user.id,
           movie: movieObject.data
         };
-
         //je crée une nouvel entrée dans la collection combo (avec l'id du user + l'objet film)
-
         Combo.create(newCombo);
-
-        var combo = newCombo;
         var user = req.user.id;
-
         // je stock les keywords du moovie dans une array
-
-        // var keywords = [];
-        // for (var i = 0; i < movieFound.data.keywords.length; i++) {
-        //   keywords.push(movieFound.data.keywords[i].name);
-        // }
-        console.log("this is movie keywords ===>" + movieFound.data.keywords);
+        var keywords = [];
+        for (var i = 0; i < movieFound.data.keywords.length; i++) {
+          keywords.push(movieFound.data.keywords[i].name);
+        }
+        console.log("this is movie keywords ===>" + keywords);
         // j'utilise l'array pour trouver des moods contenant les keywords
-
         Mood.findOne({
           keyWordMovie: { $in: keywords }
         }).exec((err, users) => {
           if (err) {
-            next(err);
+            console.error(err);
           } else {
             // si pas d'erreur, je récupère les infos du mood (notamment les keywords Marmiton)
-
             var keywordsFood = users.keyWordMarmiton;
-            //console.log("this is the food keywords ===>" + keywordsFood.name);
             // je récupère les recettes qui contiennet ces keywords
-
             Food.find({
-              keyWords: { $in: keywordsFood.name }
-            }).exec((err, result) => {
-              let dish = { dish: result };
-              console.log(dish);
-              if (err) {
-                console.error(err);
-              } else {
-                // retrouver le combo qui vient d'être créé et j'y ajoute les plats
-                Combo.findOneAndUpdate(combo, { $set: dish }, function(
-                  err,
-                  doc
-                ) {
-                  if (err) {
-                    console.log("Something wrong when updating data!");
-                  }
-                  console.log("this is the combo + food   " + doc);
-                  res.json(doc);
-                });
-              }
-            });
+              keyWords: { $in: keywordsFood }
+            })
+              .limit(10)
+              .exec((err, result) => {
+                // let dish = { dish: result };
+                if (err) {
+                  console.error(err);
+                } else {
+                  // console.log("this is result" + result);
+                  // retrouver le combo qui vient d'être créé et j'y ajoute les plats
+                  Combo.findOneAndUpdate(
+                    newCombo,
+                    { $set: { dish: result } },
+                    function(err, comboBobo) {
+                      if (err) {
+                        console.log(
+                          "Something wrong when updating data!" + err
+                        );
+                      }
+                      console.log(comboBobo);
+                      res.json(comboBobo);
+                    }
+                  );
+                }
+              });
           }
         });
       });
@@ -122,7 +117,7 @@ router.post(
 
         Combo.create(newCombo);
 
-        var combo = newCombo;
+        // var combo = newCombo;
         var user = req.user.id;
 
         Mood.find({
@@ -133,18 +128,18 @@ router.post(
           }
           console.log("je match ==+> " + result);
           let keyWordsMovie = result[0].keyWordMovie;
-          console.log("voici les keywords a utilisé   ====> " + keyWordsMovie);
+          // console.log("voici les keywords a utilisé   ====> " + keyWordsMovie);
           // find the id of the keywords movie in the mood collection
           Keyword.find({ name: keyWordsMovie }).exec((err, result) => {
             if (err) {
-              console.log("je suis erreur");
+              //console.log("je suis erreur");
               console.error(err);
             } else {
               var resultKeyword = [];
 
               for (i in result) {
                 resultKeyword.push(result[i].id);
-                console.log(resultKeyword);
+                //console.log(resultKeyword);
               }
               // call the api tmdb to fetch movie that match the keywords              // et je les join en utilisant le séparateur de l'API, puis je lance la recherche
               // let keywordQuery = resultKeyword.join("%2C%20");
@@ -155,21 +150,23 @@ router.post(
               movieFind
                 .get("discover/movie?&with_keywords=" + keywordQuery)
                 .then(listOfMovies => {
-                  console.log(listOfMovies.data);
+                  //console.log(listOfMovies.data);
                   if (err) {
                     console.error(err);
                   } else {
+                    //console.log(listOfMovies);
+                    console.log("soyyyy ele comboooooo ==+> " + newCombo);
                     // save it to the combo
                     Combo.findOneAndUpdate(
-                      combo,
+                      newCombo,
                       { $set: { movie: listOfMovies.data.results } },
-                      function(err, doc) {
+                      function(err, comboBoubou) {
                         if (err) {
                           console.log("Something wrong when updating data!");
                         }
-                        // console.log("this is the combo + food   " + doc);
-                        // console.log(doc.movie);
-                        res.json(doc);
+                        // console.log("this is the combo + food   " + comboBoubou);
+                        console.log(comBouBoubou);
+                        res.json(comboBoubou);
                       }
                     );
                   }

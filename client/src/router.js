@@ -37,7 +37,8 @@ export default new Router({
     },
     {
       path: "/mood",
-      component: Mood
+      component: Mood,
+      name: "mood"
     },
     {
       path: "/recipes",
