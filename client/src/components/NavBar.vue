@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="dark" class="bg-light" id="navBar">
+  <b-navbar toggleable="md" id="navBar">
     <b-navbar-brand class="btn-orangelogo" variant="outline">
       <router-link to="/">
         <h3 class="text-white">
@@ -16,10 +16,10 @@
       <b-navbar-nav class="ml-auto">
         <div v-if="!$root.user">
           <b-nav-item>
-            <b-button class="btn-orange" to="/login" @click.native="isActive = false" variant="outline-primary">
+            <b-button id="btnLogin" class="btn-orange" to="/login" @click.native="isActive = false" variant="outline-primary outline-secondary">
               <h6>Login</h6>
             </b-button>
-            <b-button class="btn-orange" to="/signup" @click.native="isActive = false" variant="outline-primary">
+            <b-button id="btnSignup" class="btn-orange" to="/signup" @click.native="isActive = false" variant="outline-primary outline-secondary">
               <h6>Signup</h6>
             </b-button>
           </b-nav-item>
@@ -28,21 +28,21 @@
         <div v-else>
           <b-nav-item>
 
-            <b-dropdown id="dropDown" text="Play Games" variant="outline-primary" class="btn-orange text-white transparent">
+            <b-dropdown id="dropDown" text="Play Games" variant="utline-primary outline-secondary" class="btn-orange text-white transparent">
               <b-dropdown-item class="">Zloutch</b-dropdown-item>
               <b-dropdown-item class="">Country Guessing Game</b-dropdown-item>
               <b-dropdown-item class="">Pierre Lenoir and Friends</b-dropdown-item>
             </b-dropdown>
 
-            <b-button class="btn-orange" to="/profile" @click.native="isActive = false" variant="outline-primary">
+            <b-button id="btnProfile" class="btn-orange" to="/profile" @click.native="isActive = false" variant="utline-primary outline-secondary">
               <h6>Profile</h6>
             </b-button>
 
-            <b-button class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary">
+            <b-button id="btnCreaCombo" class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="utline-primary outline-secondary">
               <h6>Create new combo</h6>
             </b-button>
 
-            <b-button @click="logout" variant="outline-primary" class="btn-orange">
+            <b-button id="btnLogout" @click="logout" variant="utline-primary outline-secondary" class="btn-orange">
               <h6>Logout</h6>
             </b-button>
           </b-nav-item>
@@ -92,17 +92,24 @@ export default {
   background-color: transparent !important;
 }
 
-.btn.btn-outline-primary.dropdown-toggle {
+.btn-outline-primary {
   border: transparent !important;
   color: white;
 }
-
+#btnLogin,
+#btnSignup,
+#dropDown,
+#btnLogout,
+#btnCreaCombo,
+#dropDown {
+  border: transparent !important;
+  color: white;
+}
 #logoNavBar {
   max-height: 3.5em;
 }
 
-.bg-light,
-.navbar-light {
+#navBar {
   background-color: rgb(255, 127, 19) !important;
 }
 
@@ -113,9 +120,5 @@ export default {
 #navBar {
   border: solid 5px white;
   border-radius: 2rem;
-}
-
-#dropDown {
-  font-size: 1.4rem !important;
 }
 </style>

@@ -3,17 +3,17 @@
 
     <div class="text-center">
 
-      <h1 class="mt-3">Diiinneeer Tiiime!!</h1>
+      <h1 class="mt-3">Diiinneeer Tiiime!!!</h1>
       <div class="m-4">
         <div>
           <h2>Craving for some movie-food pairing...</h2>
           <h5 class="mb-5"> Choose a mood and we will do the rest...</h5>
-          <b-button @click="foorForm = `searchbyMood`" class="button-profile m-4" variant="outline-primary outline-secondary">Choose a mood</b-button>
+          <b-button id="btnfoodMood" @click="foorForm = `searchbyMood`" class="button-profile m-4" variant="outline-primary outline-secondary">Mood</b-button>
         </div>
         <div>
           <h2 class="mt-5"> or your stomach is calling for something?</h2>
           <h5 class="mb-5">Choose a recipe and we will do the rest...</h5>
-          <b-button @click="foorForm = `searchFood`" class="button-profile m-4" variant="outline-primary outline-secondary">Look for a recipe</b-button>
+          <b-button id="btnfoodRecipe" @click="foorForm = `searchFood`" class="button-profile m-4" variant="utline-primary outline-secondary">Recipe</b-button>
         </div>
       </div>
     </div>
@@ -78,23 +78,26 @@ export default {
 };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css">
-.field {
+<style  scoped>
+/* src="vue-multiselect/dist/vue-multiselect.min.css" */
+/* .field {
   display: flex;
   flex-direction: row;
-}
+} */
 
-.button-profile {
+#btnfoodMood,
+#btnfoodRecipe {
   padding: 2rem;
   margin: 2%;
   width: 25vh;
-  background-color: rgb(20, 143, 119);
+  background-color: rgb(20, 143, 119) !important;
   color: white;
   font-size: 1.6rem;
   border-radius: 50rem;
 }
 
-.button-profile:hover {
+#btnfoodMood:hover,
+#btnfoodRecipe:hover {
   padding: 2rem;
   margin: 2%;
   width: 30vh;
@@ -102,16 +105,6 @@ export default {
   background-color: white;
   color: rgb(20, 143, 119);
   border: 4px solid rgb(20, 143, 119);
-  border-radius: 50rem;
-}
-
-btn .button-profile .m-4 .btn-outline-primary {
-  padding: 2rem;
-  margin: 2%;
-  width: 25vh;
-  background-color: rgb(20, 143, 119);
-  color: white;
-  font-size: 1.6rem;
   border-radius: 50rem;
 }
 </style>

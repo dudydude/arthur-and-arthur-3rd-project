@@ -79,12 +79,16 @@
                     <br>
                     <h6> Ingredients : </h6>
                   </div>
-                  <ul v-if="kg" class="text-center">
+                  <div class="text-center">
+                  <ul v-if="kg">
                     <li v-for="ingredient in result.ingredients">{{ingredient}}</li>
                   </ul>
-                  <ul v-if="!kg" class="text-center">
+                  </div>
+                  <div class="text-center">
+                  <ul v-if="!kg">
                     <li v-for="ingredient in result.ingredientsUSA">{{ingredient}}</li>
                   </ul>
+                  </div>
                   <div class="text-center my-3">
                     <b-button v-if="btnShow" @click="kg=false ; btnShow=false" variant="warning btn-sm">Switch to oz</b-button>
                     <b-button v-if="!btnShow" @click="kg=true ; btnShow=true" variant="primary btn-sm">Switch to kg</b-button>

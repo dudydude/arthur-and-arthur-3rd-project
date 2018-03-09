@@ -1,0 +1,75 @@
+/* FONT:
+font-family: 'Lilita One', cursive;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Montserrat Alternates', sans-serif;
+font-family: 'Montez', cursive; */
+
+h1 {
+  font-family: "Montserrat Alternates", sans-serif !important;
+  font-size: 5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+h2 {
+  font-family: "Lilita One", sans-serif !important;
+  font-size: 4rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+h3 {
+  font-family: "Montserrat Alternates", sans-serif !important;
+  font-size: 3rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+h4 {
+  font-family: "Lilita One", sans-serif !important;
+  font-size: 2.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+h5 {
+  font-family: "Montez", sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 2rem !important;
+}
+
+h6 {
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 1.4rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  font-family: "Montserrat", sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+hr {
+  border: solid 1px rgb(255, 127, 19) !important;
+}
+/* NAV BAR */
+
+/* OTHER */
+#b-card-group li {
+  list-style: none;
+}
+
+.tuto-container {
+  margin: 10%;
+}
+
+.keyWord {
+  margin: 0.3rem;
+  padding: 0.3rem;
+  border: peru solid 2px;
+  border-radius: 1rem;
+}
