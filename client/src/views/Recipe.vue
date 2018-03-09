@@ -2,24 +2,25 @@
 <section>
 
 <div class="text-center">
-<h2 class="has-text-centered">À Taaaaaable!!</h2>
+
+<h2 class="mt-3">Diiinneeer Tiiime!!</h2>
 <div class="m-4">
-   <b-button @click="foorForm = `searchbyMood`" variant="warning">Set up the dinner mood</b-button>
-   <b-button @click="foorForm = `searchFood`" variant="primary">J'ai les crocs, j'déglingue l'frigo!</b-button>
+   <b-button @click="foorForm = `searchbyMood`" class="btn-orange m-4">Choose my mood</b-button>
+   <b-button @click="foorForm = `searchFood`" class="btn-orange m-4">Look for a recipe</b-button>
 </div>
 </div>
 
 <div v-if="foorForm === `searchbyMood`">
-<SearchByFoodMood class="m-5"/>
+<SearchByFoodMood class="container"/>
 </div>
 
 <div v-else-if="foorForm === `searchFood`">
-<SearchForFood class="m-5"/>
+<SearchForFood class="container"/>
 </div>
 
 
 <div class="m-5 px-5">
-<hr>
+
 </div>
 
 </section>

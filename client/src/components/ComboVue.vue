@@ -89,73 +89,71 @@
 </template>
 
 <script>
-  import api from "../api";
+import api from "../api";
 
-  export default {
-    props: ["result"],
-    data() {
-      return {
-        results: [],
-        //movieOk: true,
-        slide: 0,
-        sliding: null,
-        poster: "http://image.tmdb.org/t/p/w185/",
-        path: true,
-        select: false
-      };
+export default {
+  props: ["result"],
+  data() {
+    return {
+      results: [],
+      //movieOk: true,
+      slide: 0,
+      sliding: null,
+      poster: "http://image.tmdb.org/t/p/w185/",
+      path: true,
+      select: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.$refs.myModalRef.show();
     },
-    methods: {
-      showModal() {
-        this.$refs.myModalRef.show();
-      },
-      hideModal() {
-        this.$refs.myModalRef.hide();
-      },
-      selectRecipe(id) {
-        api.selectRecipe(id).then(res => {
-          console.log("Im in Disheeeees");
-          console.log(res);
-          this.results = res;
-          this.select = true;
-          // this.movieOk = false;
-        });
-      },
-
-      selectMovie(id) {
-        api.selectMovie(id).then(res => {
-          console.log(res);
-          console.log(res);
-          this.results = res;
-          this.select = true;
-          // this.movieOk = false;
-        });
-      },
-
-      onSlideStart(slide) {
-        this.sliding = true;
-      },
-      onSlideEnd(slide) {
-        this.sliding = false;
-      }
+    hideModal() {
+      this.$refs.myModalRef.hide();
     },
-    created() {
-      console.log(this.result);
+    selectRecipe(id) {
+      api.selectRecipe(id).then(res => {
+        console.log("Im in Disheeeees");
+        console.log(res);
+        this.results = res;
+        this.select = true;
+        // this.movieOk = false;
+      });
+    },
 
-      if (this.$route.name === "mood") {
-        this.path = true;
-      } else this.path = false;
+    selectMovie(id) {
+      api.selectMovie(id).then(res => {
+        console.log(res);
+        console.log(res);
+        this.results = res;
+        this.select = true;
+        // this.movieOk = false;
+      });
+    },
+
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
     }
-  };
+  },
+  created() {
+    console.log(this.result);
+
+    if (this.$route.name === "mood") {
+      this.path = true;
+    } else this.path = false;
+  }
+};
 </script>
 
 <style>
-  ol ol,
-  ol ul,
-  ul ol,
-  ul ul {
-    display: flex;
-    flex-direction: row;
-
-
-  }
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  display: flex;
+  flex-direction: row;
+}
 </style>

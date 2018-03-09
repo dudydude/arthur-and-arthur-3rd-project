@@ -1,9 +1,9 @@
 <template>
-  <section class="text-center container">
+  <section class="text-center container my-5">
     <div v-if="!movie">
        <h2>Let's Chill and Eat!</h2>
-      <h3 class="m-2 mt-5">How to use the app</h3>
-      <p class="text-justify mx-5 my-2">You want to choose your food before looking our recommendation of matching movies? -> Click on Recipes 
+      <h3 class="m-2 mt-3">How to use the app</h3>
+      <p class="text-center mx-5 my-2">You want to choose your food before looking our recommendation of matching movies? -> Click on Recipes 
         <br> You want to look first for a movie before making your dinner menu? -> Click on Movies</p>
       <hr class="m-1">
 
@@ -50,3 +50,34 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.tuto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.button-profile {
+  padding: 2rem;
+  margin: 2%;
+  width: 25vh;
+  background-color: rgb(20, 143, 119);
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50rem;
+}
+
+.button-profile:hover {
+  padding: 2rem;
+  margin: 2%;
+  width: 30vh;
+  font-size: 2rem;
+  background-color: white;
+  color: rgb(20, 143, 119);
+  border: 4px solid rgb(20, 143, 119);
+  border-radius: 50rem;
+}
+</style>
+

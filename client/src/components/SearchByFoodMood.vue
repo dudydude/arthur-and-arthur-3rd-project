@@ -1,15 +1,18 @@
 <template>
-    <section>
-      <div id="chooseFoodMood">
-<h2 class="m-2 text-center" v-if="otherShow">How does your night tends to be:</h2>
-      <b-button @click="romance===true">Il y a une zouze, j'claque du flooz</b-button>
-      <b-button>Il y a les potos, on fait les gros</b-button>
-      <b-button>I feel like a Sexy Bitch</b-button>
-      <b-button>In mood for some blood</b-button>
+  <section>
+    <div id="chooseFoodMood" class="text-center m-3">
+      <h3 class="m-2 text-center" v-if="otherShow">What is your mood for tonight?</h3>
+      <hr class="mx-5 my-3 px-5">
+      <div class="btn-mood">
+        <b-button class="m-3">Il y a une zouze, j'claque du flooz</b-button>
+        <b-button class="m-3">Il y a les potos, on fait les gros</b-button>
+        <b-button class="m-3">I feel like a Sexy Bitch</b-button>
+        <b-button class="m-3">In mood for some blood</b-button>
+      </div>
     </div>
     <div id="foodRecoByMood">
     </div>
-    </section>
+  </section>
 
 </template>
 
@@ -23,7 +26,8 @@ export default {
       query: "",
       ingredients: "",
       show: true,
-      otherShow: true
+      otherShow: true,
+      romance: false
     };
   },
 
@@ -73,3 +77,11 @@ export default {
 };
 </script>
 
+<style scoped>
+.btn-mood {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+</style>

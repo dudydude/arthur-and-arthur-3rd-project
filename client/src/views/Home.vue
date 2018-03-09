@@ -9,10 +9,31 @@
         nulla eget diam egestas, vitae pharetra dolor suscipit. Donec malesuada congue urna et pretium. Integer dignissim
         tortor eu finibus venenatis. Nulla vel ipsum sed felis faucibus tempus sed eu mi.</p>
       <br>
-      <router-link :to="`/profile`" class="button-profile m-3 btn">GO✨✨🚀</router-link>
+      <b-button :to="`/profile`" class="button-profile">GO✨✨🚀</b-button>
       <br>
-      <br>
-      <hr class="m-3">
     </div>
   </div>
 </template>
+
+<style scoped>
+.button-profile {
+  padding: 2rem;
+  margin: 2%;
+  width: 25vh;
+  background-color: rgb(20, 143, 119);
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 50rem;
+}
+
+.button-profile:hover {
+  padding: 2rem;
+  margin: 2%;
+  width: 30vh;
+  font-size: 2rem;
+  background-color: white;
+  color: rgb(20, 143, 119);
+  border: 4px solid rgb(20, 143, 119);
+  border-radius: 50rem;
+}
+</style>

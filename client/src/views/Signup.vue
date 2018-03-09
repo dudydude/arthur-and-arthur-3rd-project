@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="m-5">
+  <div class="mt-5 container">
+    <div>
     <b-form @submit.prevent="signup">
       <b-form-group label="Email address:"
                     description="We'll never share your email with anyone else.">
