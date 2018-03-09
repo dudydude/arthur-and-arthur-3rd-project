@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/project3");
+require("dotenv").config();
+mongoose.connect(process.env.MONGODB_URI);
 const Recipe = require("../models/recipe");
 const foodAPIRaw = require("./foodDBRaw.json");
 
