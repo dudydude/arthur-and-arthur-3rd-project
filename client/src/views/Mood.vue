@@ -3,7 +3,7 @@
 
       <b-form id="movieSeach">
         <div class="text-center mb-3">
-        <h5>- enter your search -</h5>
+        <h5>- Find your movie bye using our search form : -</h5>
         </div>
         <b-form-group class="text-center">
           <b-button @click="search" variant="success">
@@ -40,7 +40,7 @@
 
                 </p>
 
-                <b-button variant="primary" :to="`movie/${result.id}`">See more</b-button>
+                <!-- <b-button variant="primary" :to="`movie/${result.id}`">See more</b-button> -->
 
                 <div>
                   <!-- <b-btn v-b-modal.modal1 @click="selectMovie(result.id)">Choose this movie</b-btn> -->
@@ -128,6 +128,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: 4rem;
 }
 
 .btn-orange {
@@ -137,5 +138,9 @@ export default {
   background-color: rgb(20, 143, 119);
   border: 0;
   padding: 10rem;
+}
+
+.btn-success {
+  height: 10rem;
 }
 </style>

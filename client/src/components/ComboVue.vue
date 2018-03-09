@@ -3,7 +3,7 @@
     <div>
       <div>
         <b-button @click="showModal">
-          <h2> Show me your combo </H2>
+          <h2> See more </H2>
         </b-button>
         <b-modal ref="myModalRef" hide-footer title="Best combo for the best user" size="lg">
           <div class="d-block text-center">
@@ -30,6 +30,7 @@
                 </b-carousel>
 
                 <p class="mt-4">
+
 
                   <h3>{{results.data.dish[slide].title}}</h3>
                   <p>{{results.data.dish[slide].method}}</p>
@@ -59,25 +60,71 @@
                 </b-card>
 
               </div>
+
+
               <!-- IF FOOD I DISPLAY A FOOD CARD  -->
 
-              <div v-else>Food
+              <div v-else> Food
 
+
+                <b-card>
+                  <b-media no-body>
+                    <b-media-body>
+                      <div class="text-center">
+                        <h2 class="mt-0">{{result.title}}</h2>
+                      </div>
+                      <div class="text-center">
+                        <p>{{result.cookingTime}}</p>
+                      </div>
+                      <p class="text-center">
+                        <span class="keyWord" v-for="keyWord in result.keyWords">{{keyWord}}</span>
+                      </p>
+                      <hr class="m-5 px-5">
+                      <div>
+                        <div class="text-center">
+                          <h5 class="m-1">{{result.indication}}</h5>
+                          <br>
+                          <h6> Ingredients : </h6>
+                        </div>
+                        <ul v-if="kg" class="text-center">
+                          <li v-for="ingredient in result.ingredients">{{ingredient}}</li>
+                        </ul>
+                        <ul v-if="!kg" class="text-center">
+                          <li v-for="ingredient in result.ingredientsUSA">{{ingredient}}</li>
+                        </ul>
+                        <div class="text-center my-3">
+                          <b-button v-if="btnShow" @click="kg=false ; btnShow=false" variant="warning btn-sm">Switch to oz</b-button>
+                          <b-button v-if="!btnShow" @click="kg=true ; btnShow=true" variant="primary btn-sm">Switch to kg</b-button>
+                        </div>
+                      </div>
+                      <p class="text-justify mx-5">
+                        {{result.method}}
+                      </p>
+
+                      <b-button variant="primary " @click="selectRecipe(result.title)">I like it food! </b-button>
+
+                    </b-media-body>
+                  </b-media>
+                </b-card>
+
+                <div v-show="">
+                </div>
               </div>
+
+
+
+
+
             </div>
 
+          </div>
 
-
-
-
+          <div>
 
           </div>
 
 
-
-
-          <b-button variant="primary " block @click="selectMovie(result.id) " v-if="path == true">Lourd combo Movie : je check</b-button>
-          <b-button variant="primary " @click="selectRecipe(result.title)" v-else>Lourd combo </b-button>
+          <b-button variant="primary " block @click="selectMovie(result.id) " v-if="path == true">I like it!</b-button>
 
           <b-btn class="mt-3 " variant="outline-danger " block @click="hideModal ">Close Me</b-btn>
         </b-modal>
@@ -89,71 +136,75 @@
 </template>
 
 <script>
-import api from "../api";
+  import api from "../api";
 
-export default {
-  props: ["result"],
-  data() {
-    return {
-      results: [],
-      //movieOk: true,
-      slide: 0,
-      sliding: null,
-      poster: "http://image.tmdb.org/t/p/w185/",
-      path: true,
-      select: false
-    };
-  },
-  methods: {
-    showModal() {
-      this.$refs.myModalRef.show();
+  export default {
+    props: ["result"],
+    data() {
+      return {
+        results: [],
+        //movieOk: true,
+        slide: 0,
+        sliding: null,
+        poster: "http://image.tmdb.org/t/p/w185/",
+        path: true,
+        select: false,
+        secondSate: false
+      };
     },
-    hideModal() {
-      this.$refs.myModalRef.hide();
-    },
-    selectRecipe(id) {
-      api.selectRecipe(id).then(res => {
-        console.log("Im in Disheeeees");
-        console.log(res);
-        this.results = res;
-        this.select = true;
-        // this.movieOk = false;
-      });
-    },
+    methods: {
+      showModal() {
+        this.$refs.myModalRef.show();
+      },
+      hideModal() {
+        this.$refs.myModalRef.hide();
+      },
+      selectRecipe(id) {
+        api.selectRecipe(id).then(res => {
+          console.log("Im in Disheeeees");
+          console.log(res);
+          this.results = res;
+          this.select = true;
+          this.secondState = true;
+        });
+      },
 
-    selectMovie(id) {
-      api.selectMovie(id).then(res => {
-        console.log(res);
-        console.log(res);
-        this.results = res;
-        this.select = true;
-        // this.movieOk = false;
-      });
-    },
+      selectMovie(id) {
+        api.selectMovie(id).then(res => {
+          console.log(res);
+          console.log(res);
+          this.results = res;
+          this.select = true;
+          this.secondState = true;
+          // this.movieOk = false;
+        });
+      },
 
-    onSlideStart(slide) {
-      this.sliding = true;
+      onSlideStart(slide) {
+        this.sliding = true;
+      },
+      onSlideEnd(slide) {
+        this.sliding = false;
+      }
     },
-    onSlideEnd(slide) {
-      this.sliding = false;
+    created() {
+      console.log(this.result);
+      this.secondSate = false;
+      this.select = false;
+
+      if (this.$route.name === "mood") {
+        this.path = true;
+        api.selectMovie(id).then(res => {
+          console.log(res);
+          console.log(res);
+          this.results = res;
+          this.select = true;
+          // this.movieOk = false;
+        });
+      } else this.path = false;
     }
-  },
-  created() {
-    console.log(this.result);
-
-    if (this.$route.name === "mood") {
-      this.path = true;
-    } else this.path = false;
-  }
-};
+  };
 </script>
 
 <style>
-ol ol,
-ol ul,
-ul ol,
-ul ul {
-  display: flex;
-  flex-direction: row;
-}
 </style>

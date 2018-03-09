@@ -164,7 +164,7 @@ export default {
     console.log("je suis la");
     return service
       .post(`combo/recipes/${id}`)
-      .then(res => res.data)
+      .then(res => res)
       .catch(err => {
         console.error(err);
       });
@@ -176,6 +176,27 @@ export default {
       .then(res => res)
       .catch(err => {
         console.error(err + "<br>" + "this is the value of res ===+>" + res);
+      });
+  },
+
+  getMood() {
+    return service
+      .get("moodlist")
+      .then(
+        response => response
+        //console.log("je suis dans me retour API    " + response)
+      )
+      .catch(err => {
+        console.error(err);
+      });
+  },
+
+  selectMood(id) {
+    return service
+      .get(`moodlist/${id}`)
+      .then(response => response)
+      .catch(err => {
+        console.error(err);
       });
   }
 };
