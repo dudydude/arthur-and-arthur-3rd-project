@@ -27,15 +27,15 @@
 
         <div v-else>
           <b-nav-item>
-            <b-button class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary">
-              <h6>Create new combo</h6>
-            </b-button>
-
             <b-dropdown id="dropDown" text="Play Games" variant="outline-primary" class="btn-orange text-white transparent">
               <b-dropdown-item class="">Zloutch</b-dropdown-item>
               <b-dropdown-item class="">Country Guessing Game</b-dropdown-item>
               <b-dropdown-item class="">Pierre Lenoir and Friends</b-dropdown-item>
             </b-dropdown>
+          
+            <b-button class="btn-orange" to="/createcombo" @click.native="isActive = false" variant="outline-primary">
+              <h6>Create new combo</h6>
+            </b-button>
 
             <b-button @click="logout" variant="outline-primary" class="btn-orange">
               <h6>Logout</h6>

@@ -1,13 +1,16 @@
 <template>
   <section>
     <div id="chooseFoodMood" class="text-center m-3">
-      <h3 class="m-2 text-center" v-if="otherShow">What is your mood for tonight?</h3>
+      <h3 class="m-2 text-center" v-if="otherShow">What is tonight about?</h3>
       <hr class="mx-5 my-3 px-5">
-      <div class="btn-mood">
-        <b-button class="m-3">Il y a une zouze, j'claque du flooz</b-button>
-        <b-button class="m-3">Il y a les potos, on fait les gros</b-button>
-        <b-button class="m-3">I feel like a Sexy Bitch</b-button>
-        <b-button class="m-3">In mood for some blood</b-button>
+      <div class="btn-mood-grp">
+        <b-button class="m-3 btn-mood">Tonight is the night</b-button>
+        <b-button class="m-3 btn-mood">Homies in da hood</b-button>
+         <b-button class="m-3 btn-mood">Bromance</b-button>
+          <b-button class="m-3 btn-mood">Play it like Maya</b-button>
+        <b-button class="m-3 btn-mood">I feel like a Sexy Bitch</b-button>
+        <b-button class="m-3 btn-mood">In mood for some blood</b-button>
+         <b-button class="m-3 btn-mood">Girls night</b-button>
       </div>
     </div>
     <div id="foodRecoByMood">
@@ -78,10 +81,26 @@ export default {
 </script>
 
 <style scoped>
-.btn-mood {
+.btn-mood-grp {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.btn-mood {
+  border-radius: 4rem;
+  background-color: rgb(20, 143, 119);
+  border: solid 4px rgb(20, 143, 119);
+  color: whitesmoke;
+  font-size: 2.4rem;
+}
+
+.btn-mood:hover {
+  border-radius: 4rem;
+  background-color: transparent;
+  border: solid 4px rgb(20, 143, 119);
+  color: rgb(20, 143, 119);
+  font-size: 2.4rem;
 }
 </style>
