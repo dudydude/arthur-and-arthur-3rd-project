@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="dark" class="bg-light" id="navBar">
+  <b-navbar toggleable="md" id="navBar">
     <b-navbar-brand class="btn-orangelogo" variant="outline">
       <router-link to="/">
         <h3 class="text-white">
@@ -101,8 +101,7 @@ export default {
   max-height: 3.5em;
 }
 
-.bg-light,
-.navbar-light {
+#navBar {
   background-color: rgb(255, 127, 19) !important;
 }
 
