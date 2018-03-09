@@ -97,7 +97,12 @@
                   <a :href="result.picURL">
                     <b-button class="primary">More Pictures</b-button>
                   </a>
-                  <combo-vue :result="result"></combo-vue>
+                  <combo-vue :result="result" @click="selectFood(result.title)"></combo-vue>
+
+
+
+
+
                 </div>
               </b-media-body>
             </b-media>
@@ -180,6 +185,15 @@ export default {
       }
       api.searchByKeyWords(justKeyWords).then(results => {
         this.results = results;
+      });
+    },
+
+    selectRecipe(id) {
+      api.selectRecipe(id).then(res => {
+        console.log("Im in Disheeeees");
+        console.log(res);
+        this.results = res;
+        // this.movieOk = false;
       });
     }
   }

@@ -43,12 +43,10 @@
                 <b-button variant="primary" :to="`movie/${result.id}`">See more</b-button>
 
                 <div>
-                  <b-btn v-b-modal.modal1 @click="selectMovie(result.id)">Choose this movie</b-btn>
-
+                  <!-- <b-btn v-b-modal.modal1 @click="selectMovie(result.id)">Choose this movie</b-btn> -->
+                  <combo-vue :result="result"></combo-vue>
                   <!-- Modal Component -->
-                  <b-modal id="modal1" title="Step 1">
-                    <p class="my-4">Vous avez sélectionnez {{result.title}}</p>
-                  </b-modal>
+
                 </div>
 
               </b-media-body>
@@ -68,6 +66,7 @@ import api from "../api";
 import Multiselect from "vue-multiselect";
 import dataKeyword from "../../../server/data/keywords_tmdb.json";
 import dataGenre from "../../../server/data/genre_tmdb.json";
+import ComboVue from "../components/ComboVue";
 
 export default {
   data() {
@@ -84,7 +83,8 @@ export default {
     };
   },
   components: {
-    Multiselect
+    Multiselect,
+    ComboVue
   },
   methods: {
     search(query) {
@@ -108,6 +108,16 @@ export default {
         console.log(this.modal);
       });
     },
+    showModal() {
+      this.$refs.myModalRef.show();
+    },
+    hideModal() {
+      this.$refs.myModalRef.hide();
+    },
+    onSubmit(evt) {
+      evt.preventDefault();
+    },
+
     computed: {}
   }
 };

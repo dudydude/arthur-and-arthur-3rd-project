@@ -8,7 +8,7 @@
             </b-form-group>
             <b-form-group id="mood" label="Enter new combo name:" label-for="exampleInput1" description="Come as you are, we won't judge you.">
 
-                <multiselect v-model="movieThemeKeyword" :multiple="true" :options="MovieKeywordOptions" placeholder="Search by keywords"
+                <multiselect v-model="movieThemeKeyword" return="name" :multiple="true" :options="MovieKeywordOptions" placeholder="Search by keywords"
                     label="name" track-by="name" class="mb-2 mr-sm-2 mb-sm-0" id="inlineFormInputName2"></multiselect>
 
             </b-form-group>
@@ -29,7 +29,7 @@
 <script>
 import api from "../api";
 import Multiselect from "vue-multiselect";
-import optionKeyWords from "../../../server/data/keywords_food.json";
+import optionKeyWords from "../../../server/data/keywords_food_clean.json";
 import dataKeyword from "../../../server/data/keywords_tmdb.json";
 
 export default {
@@ -37,8 +37,11 @@ export default {
     return {
       FoodKeywordOptions: optionKeyWords,
       foodThemeKeyword: [],
+      selectedNameFood: [],
       MovieKeywordOptions: dataKeyword,
       movieThemeKeyword: [],
+      selectedNameMovie: [],
+
       moodName: ""
     };
   },
@@ -61,8 +64,8 @@ export default {
       api
         .createMood({
           name: this.moodName,
-          keyWordMovie: this.movieThemeKeyword,
-          keyWordMarmiton: this.foodThemeKeyword
+          keyWordMovie: this.selectedNameMovie,
+          keyWordMarmiton: this.selectedNameFood
         })
         .then(res => {
           console.log(res);
@@ -75,6 +78,14 @@ export default {
   },
   components: {
     Multiselect
+  },
+  watch: {
+    foodThemeKeyword(newValues) {
+      this.selectedNameFood = newValues.map(obj => obj.name);
+    },
+    movieThemeKeyword(newValues) {
+      this.selectedNameMovie = newValues.map(obj => obj.name);
+    }
   }
 };
 </script>

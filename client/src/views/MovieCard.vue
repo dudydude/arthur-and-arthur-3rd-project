@@ -17,7 +17,7 @@
     </b-card>
 
     <p v-else>Loading</p>
-    <pre>{{movie}}</pre>
+    
   </section>
 
 </template>
