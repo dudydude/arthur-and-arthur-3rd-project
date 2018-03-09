@@ -1,8 +1,10 @@
 <template>
   <section class="container">
+    
     <div class="text-center">
-      <h4 class="m-2" v-if="showIt">Enter what you're craving for, we will find it for you:</h4>
+      <h3 class="m-2" v-if="showIt">Enter what you're craving for, we will find it for you:</h3>
     </div>
+    <hr class="mx-3">
     <div>
       <!-- search by title -->
 
@@ -45,7 +47,7 @@
 
     </div>
     <div>
-
+<hr class="mx-3 my-2">
  <div class="text-center mt-4" v-if="results.length>0">
         <h2>PAGE {{page}}</h2>
       </div>
