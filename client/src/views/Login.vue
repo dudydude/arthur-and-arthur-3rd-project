@@ -19,7 +19,7 @@
           </b-form-input>
       </b-form-group>
       <div class="text-center">
-      <b-button type="submit" variant="outline-primary" class="btn-test">Login</b-button>
+      <b-button type="submit" variant="primary" class="btn-test">Login</b-button>
       </div>
     </b-form>
   </section>

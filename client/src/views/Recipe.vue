@@ -8,12 +8,12 @@
         <div>
           <h2>Craving for some movie-food pairing...</h2>
           <h5 class="mb-5"> Choose a mood and we will do the rest...</h5>
-          <b-button @click="foorForm = `searchbyMood`" class="button-profile m-4" variant="outline">Choose a mood</b-button>
+          <b-button id="btnfoodMood" @click="foorForm = `searchbyMood`" class="button-profile m-4" variant="outline-primary outline-secondary">Mood</b-button>
         </div>
         <div>
           <h2 class="mt-5"> or your stomach is calling for something?</h2>
           <h5 class="mb-5">Choose a recipe and we will do the rest...</h5>
-          <b-button @click="foorForm = `searchFood`" class="button-profile m-4" variant="outline">Look for a recipe</b-button>
+          <b-button id="btnfoodRecipe" @click="foorForm = `searchFood`" class="button-profile m-4" variant="utline-primary outline-secondary">Recipe</b-button>
         </div>
       </div>
     </div>
@@ -85,7 +85,8 @@ export default {
   flex-direction: row;
 } */
 
-.btn .button-profile {
+#btnfoodMood,
+#btnfoodRecipe {
   padding: 2rem;
   margin: 2%;
   width: 25vh;
@@ -95,7 +96,8 @@ export default {
   border-radius: 50rem;
 }
 
-.btn .button-profile:hover {
+#btnfoodMood:hover,
+#btnfoodRecipe:hover {
   padding: 2rem;
   margin: 2%;
   width: 30vh;
